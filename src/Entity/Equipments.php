@@ -19,12 +19,6 @@ class Equipments
     #[ORM\Column]
     private ?bool $option = null;
 
-    #[ORM\Column]
-    private ?int $User_id = null;
-
-    #[ORM\Column]
-    private ?int $classroom = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
@@ -44,30 +38,6 @@ class Equipments
     public function setOption(bool $option): static
     {
         $this->option = $option;
-
-        return $this;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->User_id;
-    }
-
-    public function setUserId(int $User_id): static
-    {
-        $this->User_id = $User_id;
-
-        return $this;
-    }
-
-    public function getClassroom(): ?int
-    {
-        return $this->classroom;
-    }
-
-    public function setClassroom(int $classroom): static
-    {
-        $this->classroom = $classroom;
 
         return $this;
     }

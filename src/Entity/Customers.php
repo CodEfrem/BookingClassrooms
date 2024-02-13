@@ -19,9 +19,6 @@ class Customers
     #[ORM\Column]
     private ?int $effective = null;
 
-    #[ORM\Column]
-    private ?int $booking_id = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
@@ -45,18 +42,6 @@ class Customers
     public function setEffective(int $effective): static
     {
         $this->effective = $effective;
-
-        return $this;
-    }
-
-    public function getBookingId(): ?int
-    {
-        return $this->booking_id;
-    }
-
-    public function setBookingId(int $booking_id): static
-    {
-        $this->booking_id = $booking_id;
 
         return $this;
     }

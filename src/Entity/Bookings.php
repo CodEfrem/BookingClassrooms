@@ -16,9 +16,6 @@ class Bookings
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $user_id = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $start_date = null;
 
@@ -31,9 +28,6 @@ class Bookings
     #[ORM\Column]
     private ?bool $status = null;
 
-    #[ORM\Column]
-    private ?int $classroom_id = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
@@ -43,18 +37,6 @@ class Bookings
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): static
-    {
-        $this->user_id = $user_id;
-
-        return $this;
     }
 
     public function getStartDate(): ?\DateTimeInterface
@@ -101,18 +83,6 @@ class Bookings
     public function setStatus(bool $status): static
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getClassroomId(): ?int
-    {
-        return $this->classroom_id;
-    }
-
-    public function setClassroomId(int $classroom_id): static
-    {
-        $this->classroom_id = $classroom_id;
 
         return $this;
     }
