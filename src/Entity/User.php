@@ -2,10 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use App\Repository\UserRepository;
+use Symfony\Component\Mime\Message;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
@@ -17,6 +21,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email(
+        message: 'The email "{{ value }}" is not a valid email. Try again.',
+    )]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -26,30 +33,78 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Assert\Regex(
+        pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+        message: 'Your password must contain : at least 1 uppercase letter, 1 lowercase letter, 1 number, at least 1 special character, at least 8 characters'
+    )]
     private ?string $password = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Your name must be at least {{ limit }} characters long',
+        maxMessage: 'Your name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $name = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Length(
+        min: 2,
+        max: 100,
+        minMessage: 'Your corporate_name must be at least {{ limit }} characters long',
+        maxMessage: 'Your corporate_name cannot be longer than {{ limit }} characters',
+    )]
     private ?string $corporate_name = null;
 
     #[ORM\Column(length: 14)]
+    #[Assert\Length(
+        exactly: 14,
+        exactMessage:'Your siret must be at {{limit}} characters long',
+    )] 
     private ?string $siret = null;
 
     #[ORM\Column(length: 15, nullable: true)]
+    #[Assert\Length(
+        exactly: 15,
+        exactMessage:'Your phone must be at {{limit}} characters long',
+    )] 
     private ?string $phone = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'Your address must be at least {{ limit }} characters long',
+        maxMessage: 'Your address cannot be longer than {{ limit }} characters',
+    )]
     private ?string $address = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Your city must be at least {{ limit }} characters long',
+        maxMessage: 'Your city cannot be longer than {{ limit }} characters',
+    )]
     private ?string $city = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\Length(
+        min: 5,
+        max: 20,
+        minMessage: 'Your zip must be at least {{ limit }} characters long',
+        maxMessage: 'Your zip cannot be longer than {{ limit }} characters',
+    )]
     private ?string $zip = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Your country must be at least {{ limit }} characters long',
+        maxMessage: 'Your country cannot be longer than {{ limit }} characters',
+    )]
     private ?string $country = null;
 
     #[ORM\Column(nullable: true)]
