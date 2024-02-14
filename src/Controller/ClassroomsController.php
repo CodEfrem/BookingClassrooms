@@ -2,17 +2,31 @@
 
 namespace App\Controller;
 
+use App\Entity\Classrooms;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\Persistence\ManagerRegistry; 
 
 class ClassroomsController extends AbstractController
 {
+    private $managerRegistry;
+
+    public function __construct(ManagerRegistry $managerRegistry)
+    {
+        $this->managerRegistry = $managerRegistry;
+    }
+
     #[Route('/classrooms', name: 'app_classrooms')]
     public function index(): Response
     {
+    
+        $classrooms = $this->managerRegistry
+            ->getRepository(Classrooms::class)
+            ->findAll();
+        
         return $this->render('classrooms/index.html.twig', [
-            'controller_name' => 'ClassroomsController',
+            'classrooms' => $classrooms,
         ]);
     }
 }
