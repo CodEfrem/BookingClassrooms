@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: ClassroomRepository::class)]
 class Classroom
@@ -17,21 +19,48 @@ class Classroom
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank(
+        message: 'You should enter a title.'
+    )]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(
+        min: 2,
+        max: 255,
+        minMessage: 'The address must be at least {{ limit }} characters long',
+        maxMessage: 'The address cannot be longer than {{ limit }} characters',
+    )]
     private ?string $address = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'The city must be at least {{ limit }} characters long',
+        maxMessage: 'The city cannot be longer than {{ limit }} characters',
+    )]
     private ?string $city = null;
 
     #[ORM\Column(length: 20)]
+    #[Assert\Length(
+        min: 5,
+        max: 20,
+        minMessage: 'Your zip must be at least {{ limit }} characters long',
+        maxMessage: 'Your zip cannot be longer than {{ limit }} characters',
+    )]
     private ?string $zip = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'The country must be at least {{ limit }} characters long',
+        maxMessage: 'The country cannot be longer than {{ limit }} characters',
+    )]
     private ?string $country = null;
 
     #[ORM\Column(length: 50)]
@@ -44,6 +73,12 @@ class Classroom
     private ?bool $parking = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Positive(
+        message: 'The price cannot be negative or free.'
+    )]
+    #[Assert\NotBlank(
+        message: 'You should enter a price.'
+    )]
     private ?string $price = null;
 
     #[ORM\Column(nullable: true)]
