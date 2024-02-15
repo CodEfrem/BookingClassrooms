@@ -1,15 +1,15 @@
 <div class="container">
     <form method="get" action="{{ path('app_classrooms') }}" class="row g-3 bg-light p-4 rounded shadow-sm" style="max-height: 300px; overflow-y: auto;">
         <div class="col-md-4">
-            <label for="city" class="form-label">Ville:</label>
+            <label for="city" class="form-label">Ville :</label>
             <input type="text" id="city" name="city" class="form-control">
         </div>
         <div class="col-md-4">
-            <label for="date" class="form-label">Date:</label>
+            <label for="date" class="form-label">Date :</label>
             <input type="date" id="date" name="date" class="form-control">
         </div>
         <div class="col-md-4">
-            <label for="software" class="form-label">Logiciels:</label>
+            <label for="software" class="form-label">Logiciels :</label>
             <select id="software" name="software[]" multiple class="form-select">
                 <option value="software1">Logiciel 1</option>
                 <option value="software2">Logiciel 2</option>
@@ -32,6 +32,12 @@
             <div class="form-check">
                 <input class="form-check-input" type="checkbox" id="videoprojector" name="videoprojector">
                 <label class="form-check-label" for="videoprojector">Vidéoprojecteur</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="pmr" name="pmr">
+                <label class="form-check-label" for="pmr">Accès PMR</label>
             </div>
         </div>
         <div class="col-12">
