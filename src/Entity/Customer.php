@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\CustomersRepository;
+use App\Repository\CustomerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
-#[ORM\Entity(repositoryClass: CustomersRepository::class)]
+#[ORM\Entity(repositoryClass: CustomerRepository::class)]
 #[Broadcast]
-class Customers
+class Customer
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

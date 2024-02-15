@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipmentsRepository;
+use App\Repository\EquipmentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
-#[ORM\Entity(repositoryClass: EquipmentsRepository::class)]
+#[ORM\Entity(repositoryClass: EquipmentRepository::class)]
 #[Broadcast]
-class Equipments
+class Equipment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -24,6 +26,14 @@ class Equipments
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
+
+    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'equipment')]
+    private Collection $admin;
+
+    public function __construct()
+    {
+        $this->admin = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -62,6 +72,36 @@ class Equipments
     public function setUpdatedAt(\DateTimeInterface $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getAdmin(): Collection
+    {
+        return $this->admin;
+    }
+
+    public function addAdmin(User $admin): static
+    {
+        if (!$this->admin->contains($admin)) {
+            $this->admin->add($admin);
+            $admin->setEquipment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAdmin(User $admin): static
+    {
+        if ($this->admin->removeElement($admin)) {
+            // set the owning side to null (unless already changed)
+            if ($admin->getEquipment() === $this) {
+                $admin->setEquipment(null);
+            }
+        }
 
         return $this;
     }

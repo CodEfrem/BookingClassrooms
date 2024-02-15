@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\BookingsRepository;
+use App\Repository\BookingRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
-#[ORM\Entity(repositoryClass: BookingsRepository::class)]
+#[ORM\Entity(repositoryClass: BookingRepository::class)]
 #[Broadcast]
-class Bookings
+class Booking
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

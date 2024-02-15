@@ -121,6 +121,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
+    #[ORM\ManyToOne(inversedBy: 'admin')]
+    private ?Equipments $equipment = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -331,6 +334,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): static
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getEquipment(): ?Equipments
+    {
+        return $this->equipment;
+    }
+
+    public function setEquipment(?Equipments $equipment): static
+    {
+        $this->equipment = $equipment;
 
         return $this;
     }
