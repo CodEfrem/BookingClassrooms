@@ -34,7 +34,6 @@ This entity represents a user of the platform. The user can be a client or a adm
 | zip            | string    | 20 NOT NULL          |              |
 | country        | string    | 50 NOT NULL          |              |
 | consent        | bool      |                      |              |
-| equipments     | ManyToOne |                      | Equipment    | 
 | created_at     | datetime  | NOT NULL             |              |
 | updated_at     | datetime  |                      |              |
 | 
@@ -88,12 +87,13 @@ This entity represents a booking made by client for a classroom.
 
 This entity represents the equipment for a classroom.
 
-| Property   | Type       | Description | Relationship |
-|------------|------------|-------------|--------------|
-| option     | bool       | NOT NULL    |              | 
-| classrooms | ManyToMany | NOT NULL    | Classroom    | 
-| created_at | datetime   | NOT NULL    |              |
-| updated_at | datetime   |             |              |
+| Property   | Type       | Description          | Relationship |
+|------------|------------|----------------------|--------------|
+| option     | bool       | NOT NULL             |              | 
+| admin      | ManyToOne  | NOT NULL, OrphanTrue |              |
+| classrooms | ManyToMany | NOT NULL             | Classroom    | 
+| created_at | datetime   | NOT NULL             |              |
+| updated_at | datetime   |                      |              |
 
 ---
 
