@@ -104,7 +104,7 @@ This entity represents the customer who will use the classroom.
 | Property   | Type      | Description | Relationship |
 |------------|-----------|-------------|--------------|
 | effective  | int       | NOT NULL    |              | 
-| booking    | OneToMany |             | Booking      | 
+| booking    | ManyToOne |             | Booking      | 
 | created_at | datetime  | NOT NULL    |              | 
 
 ## Pages architecture
