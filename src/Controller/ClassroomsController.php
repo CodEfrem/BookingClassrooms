@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Classrooms;
+use App\Entity\Classroom;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -22,11 +22,13 @@ class ClassroomsController extends AbstractController
     {
     
         $classrooms = $this->managerRegistry
-            ->getRepository(Classrooms::class)
+            ->getRepository(Classroom::class)
             ->findAll();
         
         return $this->render('classrooms/index.html.twig', [
             'classrooms' => $classrooms,
         ]);
     }
+
+    
 }
