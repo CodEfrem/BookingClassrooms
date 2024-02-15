@@ -123,8 +123,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    #[ORM\ManyToOne(inversedBy: 'admin')]
-    private ?Equipment $equipment = null;
+    // #[ORM\ManyToOne(inversedBy: 'admin')]
+    // private ?Equipment $equipment = null;
 
     #[ORM\OneToMany(targetEntity: Classroom::class, mappedBy: 'admin', orphanRemoval: true)]
     private Collection $classrooms;
@@ -132,10 +132,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'client', orphanRemoval: true)]
     private Collection $bookings;
 
+    #[ORM\OneToMany(targetEntity: Equipment::class, mappedBy: 'admin', orphanRemoval: true)]
+    private Collection $equipments;
+
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->equipments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -352,18 +356,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getEquipment(): ?Equipment
-    {
-        return $this->equipment;
-    }
-
-    public function setEquipment(?Equipment $equipment): static
-    {
-        $this->equipment = $equipment;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Classroom>
      */
@@ -419,6 +411,24 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             if ($booking->getClient() === $this) {
                 $booking->setClient(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipment>
+     */
+    public function getEquipments(): Collection
+    {
+        return $this->equipments;
+    }
+
+    public function addEquipment(Equipment $equipment): static
+    {
+        if (!$this->equipments->contains($equipment)) {
+            $this->equipments->add($equipment);
+            $equipment->setUser($this);
         }
 
         return $this;

@@ -27,15 +27,15 @@ class Equipment
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'equipment')]
-    private Collection $admin;
+    #[ORM\ManyToOne(inversedBy: 'equipments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $admin = null;
 
     #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]
     private Collection $classrooms;
 
     public function __construct()
     {
-        $this->admin = new ArrayCollection();
         $this->classrooms = new ArrayCollection();
     }
 
@@ -81,36 +81,6 @@ class Equipment
     }
 
     /**
-     * @return Collection<int, User>
-     */
-    public function getAdmin(): Collection
-    {
-        return $this->admin;
-    }
-
-    public function addAdmin(User $admin): static
-    {
-        if (!$this->admin->contains($admin)) {
-            $this->admin->add($admin);
-            $admin->setEquipment($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAdmin(User $admin): static
-    {
-        if ($this->admin->removeElement($admin)) {
-            // set the owning side to null (unless already changed)
-            if ($admin->getEquipment() === $this) {
-                $admin->setEquipment(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Classroom>
      */
     public function getClassrooms(): Collection
@@ -133,6 +103,18 @@ class Equipment
         if ($this->classrooms->removeElement($classroom)) {
             $classroom->removeEquipment($this);
         }
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->admin;
+    }
+
+    public function setUser(?User $admin): static
+    {
+        $this->admin = $admin;
 
         return $this;
     }
