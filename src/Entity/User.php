@@ -127,14 +127,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Equipment $equipment = null;
 
     #[ORM\OneToMany(targetEntity: Classroom::class, mappedBy: 'admin', orphanRemoval: true)]
-    private Collection $equipments;
+    private Collection $classrooms;
 
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'client', orphanRemoval: true)]
     private Collection $bookings;
 
     public function __construct()
     {
-        $this->equipments = new ArrayCollection();
+        $this->classrooms = new ArrayCollection();
         $this->bookings = new ArrayCollection();
     }
 
@@ -367,27 +367,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, Classroom>
      */
-    public function getEquipments(): Collection
+    public function getClassrooms(): Collection
     {
-        return $this->equipments;
+        return $this->classrooms;
     }
 
-    public function addEquipment(Classroom $equipment): static
+    public function addClassroom(Classroom $classroom): static
     {
-        if (!$this->equipments->contains($equipment)) {
-            $this->equipments->add($equipment);
-            $equipment->setAdmin($this);
+        if (!$this->classrooms->contains($classroom)) {
+            $this->classrooms->add($classroom);
+            $classroom->setAdmin($this);
         }
 
         return $this;
     }
 
-    public function removeEquipment(Classroom $equipment): static
+    public function removeEquipment(Classroom $classroom): static
     {
-        if ($this->equipments->removeElement($equipment)) {
+        if ($this->classrooms->removeElement($classroom)) {
             // set the owning side to null (unless already changed)
-            if ($equipment->getAdmin() === $this) {
-                $equipment->setAdmin(null);
+            if ($classroom->getAdmin() === $this) {
+                $classroom->setAdmin(null);
             }
         }
 
