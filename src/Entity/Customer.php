@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipmentsRepository;
+use App\Repository\CustomerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\UX\Turbo\Attribute\Broadcast;
 
-#[ORM\Entity(repositoryClass: EquipmentsRepository::class)]
+#[ORM\Entity(repositoryClass: CustomerRepository::class)]
 #[Broadcast]
-class Equipments
+class Customer
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,27 +17,34 @@ class Equipments
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?bool $option = null;
+    private ?int $effective = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $updated_at = null;
+    #[ORM\ManyToOne(inversedBy: 'customers')]
+    private ?Booking $booking = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function isOption(): ?bool
+    public function setId(int $id): static
     {
-        return $this->option;
+        $this->id = $id;
+
+        return $this;
     }
 
-    public function setOption(bool $option): static
+    public function getEffective(): ?int
     {
-        $this->option = $option;
+        return $this->effective;
+    }
+
+    public function setEffective(int $effective): static
+    {
+        $this->effective = $effective;
 
         return $this;
     }
@@ -54,14 +61,14 @@ class Equipments
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getBooking(): ?Booking
     {
-        return $this->updated_at;
+        return $this->booking;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): static
+    public function setBooking(?Booking $booking): static
     {
-        $this->updated_at = $updated_at;
+        $this->booking = $booking;
 
         return $this;
     }

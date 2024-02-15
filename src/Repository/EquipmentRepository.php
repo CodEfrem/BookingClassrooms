@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Equipments;
+use App\Entity\Equipment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Equipments>
+ * @extends ServiceEntityRepository<Equipment>
  *
- * @method Equipments|null find($id, $lockMode = null, $lockVersion = null)
- * @method Equipments|null findOneBy(array $criteria, array $orderBy = null)
- * @method Equipments[]    findAll()
- * @method Equipments[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Equipment|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Equipment|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Equipment[]    findAll()
+ * @method Equipment[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class EquipmentsRepository extends ServiceEntityRepository
+class EquipmentRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Equipments::class);
+        parent::__construct($registry, Equipment::class);
     }
 
 //    /**
-//     * @return Equipments[] Returns an array of Equipments objects
+//     * @return Equipment[] Returns an array of Equipment objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class EquipmentsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Equipments
+//    public function findOneBySomeField($value): ?Equipment
 //    {
 //        return $this->createQueryBuilder('e')
 //            ->andWhere('e.exampleField = :val')

@@ -2,27 +2,27 @@
 
 namespace App\Repository;
 
-use App\Entity\Classrooms;
+use App\Entity\Customer;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Classrooms>
+ * @extends ServiceEntityRepository<Customer>
  *
- * @method Classrooms|null find($id, $lockMode = null, $lockVersion = null)
- * @method Classrooms|null findOneBy(array $criteria, array $orderBy = null)
- * @method Classrooms[]    findAll()
- * @method Classrooms[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Customer|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Customer|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Customer[]    findAll()
+ * @method Customer[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ClassroomsRepository extends ServiceEntityRepository
+class CustomerRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Classrooms::class);
+        parent::__construct($registry, Customer::class);
     }
 
 //    /**
-//     * @return Classrooms[] Returns an array of Classrooms objects
+//     * @return Customer[] Returns an array of Customer objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class ClassroomsRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Classrooms
+//    public function findOneBySomeField($value): ?Customer
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')
