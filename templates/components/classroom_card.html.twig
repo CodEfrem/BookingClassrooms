@@ -1,13 +1,17 @@
-<div class="col-md-4 mb-4">
-    <div class="card h-100">
-        <div class="card-body">
-            <h5 class="card-title">{{ classroom.name }}</h5>
-            <p class="card-text">{{ classroom.description }}</p>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Address:</strong> {{ classroom.address }}, {{ classroom.zip }} {{ classroom.city }}, {{ classroom.country }}</li>
-                <li class="list-group-item"><strong>Capacity:</strong> {{ classroom.gauge }}</li>
-                <li class="list-group-item"><strong>Floor:</strong> {{ classroom.floor }}</li>
-            </ul>
+<div class="row">
+    <?php foreach ($classrooms as $classroom): ?>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title"><?php echo $classroom->name; ?></h5>
+                    <p class="card-text"><?php echo $classroom->description; ?></p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Address:</strong> <?php echo $classroom->address; ?>, <?php echo $classroom->zip; ?> <?php echo $classroom->city; ?>, <?php echo $classroom->country; ?></li>
+                        <li class="list-group-item"><strong>Capacity:</strong> <?php echo $classroom->gauge; ?></li>
+                        <li class="list-group-item"><strong>Floor:</strong> <?php echo $classroom->floor; ?></li>
+                    </ul>
+                </div>
+            </div>
         </div>
-    </div>
+    <?php endforeach; ?>
 </div>
