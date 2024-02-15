@@ -49,18 +49,19 @@ class Classroom
     #[ORM\Column(nullable: true)]
     private ?bool $status = null;
 
-    #[ORM\ManyToOne(inversedBy: 'equipments')]
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
+    #[ORM\ManyToOne(inversedBy: 'classrooms')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $admin = null;
 
     #[ORM\ManyToMany(targetEntity: Equipment::class, inversedBy: 'classrooms')]
     private Collection $equipments;
 
-    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'classroom')]
+    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'classroom', orphanRemoval: true)]
     private Collection $bookings;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
 
     public function __construct()
     {
@@ -285,5 +286,4 @@ class Classroom
         return $this;
     }
 
-  
 }
