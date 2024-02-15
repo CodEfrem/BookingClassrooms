@@ -59,6 +59,9 @@ class Classroom
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'classroom')]
     private Collection $bookings;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->equipments = new ArrayCollection();
@@ -266,6 +269,18 @@ class Classroom
                 $booking->setClassroom(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
