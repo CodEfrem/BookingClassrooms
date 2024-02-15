@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nos Salles{% endblock %}
+{% block title %}Classrooms - My School{% endblock %}
 
 {% block body %}
     <div class="p-5 mb-4 border-bottom border-2">
-        <h1 class="">Nos Salles</h1>
+        <h1 class="">Classrooms</h1>
     </div>
 
     <div class="container">
@@ -13,5 +13,13 @@
                 {{ include('components/classroom_card.html.twig', {'classroom': classroom}) }}
             {% endfor %}
         </div>
+    </div>
+
+    {{ include('classrooms/filtrage.html.twig') }}
+
+    <div class="classrooms-list">
+        {% for classroom in classrooms %}
+            {{ include('classrooms/card.html.twig', { 'classroom': classroom }) }}
+        {% endfor %}
     </div>
 {% endblock %}
