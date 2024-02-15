@@ -1,33 +1,41 @@
-<form method="get" action="{{ path('app_classrooms') }}" class="row g-3">
-    <div class="col-md-4">
-        <label for="city" class="form-label">Ville:</label>
-        <input type="text" id="city" name="city" class="form-control">
-    </div>
-    <div class="col-md-4">
-        <label for="date" class="form-label">Date:</label>
-        <input type="date" id="date" name="date" class="form-control">
-    </div>
-    <div class="col-md-4">
-        <label for="software" class="form-label">Logiciels:</label>
-        <select id="software" name="software[]" multiple class="form-select">
-            <option value="software1">Logiciel 1</option>
-            <option value="software2">Logiciel 2</option>
-            <option value="software3">Logiciel 3</option>
-        </select>
-    </div>
-    <div class="col-md-4">
-        <label for="daylight" class="form-label">Lumière naturelle:</label>
-        <input type="text" id="daylight" name="daylight" class="form-control">
-    </div>
-    <div class="col-md-4">
-        <label for="artificiallight" class="form-label">Lumière artificielle:</label>
-        <input type="text" id="artificiallight" name="artificiallight" class="form-control">
-    </div>
-    <div class="col-md-4">
-        <label for="videoprojector" class="form-label">Vidéoprojecteur:</label>
-        <input type="text" id="videoprojector" name="videoprojector" class="form-control">
-    </div>
-    <div class="col-12">
-        <button type="submit" class="btn btn-primary">Filtrer</button>
-    </div>
-</form>
+<div class="container">
+    <form method="get" action="{{ path('app_classrooms') }}" class="row g-3 bg-light p-4 rounded shadow-sm" style="max-height: 300px; overflow-y: auto;">
+        <div class="col-md-4">
+            <label for="city" class="form-label">Ville:</label>
+            <input type="text" id="city" name="city" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <label for="date" class="form-label">Date:</label>
+            <input type="date" id="date" name="date" class="form-control">
+        </div>
+        <div class="col-md-4">
+            <label for="software" class="form-label">Logiciels:</label>
+            <select id="software" name="software[]" multiple class="form-select">
+                <option value="software1">Logiciel 1</option>
+                <option value="software2">Logiciel 2</option>
+                <option value="software3">Logiciel 3</option>
+            </select>
+        </div>
+        <div class="col-md-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="daylight" name="daylight">
+                <label class="form-check-label" for="daylight">Lumière naturelle</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="artificiallight" name="artificiallight">
+                <label class="form-check-label" for="artificiallight">Lumière artificielle</label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="videoprojector" name="videoprojector">
+                <label class="form-check-label" for="videoprojector">Vidéoprojecteur</label>
+            </div>
+        </div>
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Filtrer</button>
+        </div>
+    </form>
+</div>
