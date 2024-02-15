@@ -1,43 +1,26 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ classroom.name }}Classroom-details{% endblock %}
+{% block title %}Description des Salles{% endblock %}
 
 {% block body %}
-    <div class="p-5 mb-4 border-bottom border-2">
-        <h1 class="text-center">{{ classroom.name }}</h1>
-    </div>
-
     <div class="container">
         <div class="row">
-            <div class="col-md-8 mx-auto">
-                <div class="card">
-                    <div class="card-body">
-                        <h2 class="card-title">Détails de la salle</h2>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"><strong>Description :</strong> {{ classroom.description }}</li>
-                            <li class="list-group-item"><strong>Adresse :</strong> {{ classroom.address }}, {{ classroom.zip }} {{ classroom.city }}, {{ classroom.country }}</li>
-                            <li class="list-group-item"><strong>Superficie :</strong> {{ classroom.gauge }}</li>
-                            <li class="list-group-item"><strong>Étage :</strong> {{ classroom.floor }}</li>
-                            <li class="list-group-item"><strong>Disponibilité du parking :</strong> {% if classroom.parking %} Oui {% else %} Non {% endif %}</li>
-                            <li class="list-group-item"><strong>Prix :</strong> {{ classroom.price }}</li>
-                            <li class="list-group-item"><strong>Statut :</strong> {% if classroom.status %} Activé {% else %} Désactivé {% endif %}</li>
-                        </ul>
+            {% for classroom in classrooms %}
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ classroom.name }}</h5>
+                            <p class="card-text">{{ classroom.description }}</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Adresse:</strong> {{ classroom.address }}, {{ classroom.zip }} {{ classroom.city }}, {{ classroom.country }}</li>
+                                <li class="list-group-item"><strong>Capacité:</strong> {{ classroom.gauge }}</li>
+                                <li class="list-group-item"><strong>Étage:</strong> {{ classroom.floor }}</li>
+                            </ul>
+                            <a href="{{ path('classroom_details', {'id': classroom.id}) }}" class="btn btn-primary">Voir les détails</a>
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
-
-
-    <section class="bg-light py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <h2 class="text-center mb-4">Location de salle</h2>
-                    <p class="lead text-center">Réservez dès maintenant cette salle pour votre événement !</p>
-                    <!-- ici le formulaire ou le lien de réservation -->
-                </div>
-            </div>
-        </div>
-    </section>
 {% endblock %}

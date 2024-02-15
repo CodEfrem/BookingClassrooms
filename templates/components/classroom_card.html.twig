@@ -1,17 +1,37 @@
 <div class="row">
-    <?php foreach ($classrooms as $classroom): ?>
+    {% for classroom in classrooms %}
         <div class="col-md-4 mb-4">
             <div class="card h-100">
-                <div class="card-body">
-                    <h5 class="card-title"><?php echo $classroom->name; ?></h5>
-                    <p class="card-text"><?php echo $classroom->description; ?></p>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item"><strong>Address:</strong> <?php echo $classroom->address; ?>, <?php echo $classroom->zip; ?> <?php echo $classroom->city; ?>, <?php echo $classroom->country; ?></li>
-                        <li class="list-group-item"><strong>Capacity:</strong> <?php echo $classroom->gauge; ?></li>
-                        <li class="list-group-item"><strong>Floor:</strong> <?php echo $classroom->floor; ?></li>
-                    </ul>
+                <div class="position-relative">
+                    <div class="img-overlay p-2 position-absolute h-100 w-100 d-flex flex-column justify-content-between rounded-4">
+                        {# Host info : img + firstname #}
+                        <div class="card-host-info d-flex gap-2 align-items-center">
+                            <img src="{{ asset('uploads/users/') }}{{ classroom.host.image }}" alt="{{ classroom.host.firstname }} {{ classroom.host.lastname }}" class="rounded-pill">
+                            <p class="text-white m-0">{{ classroom.host.firstname }}</p>
+                        </div>
+                    </div>
+                    <img src="{{ asset('uploads/rooms/') }}{{ classroom.cover }}" class="img-fluid rounded-4" alt="{{ classroom.title }}">
+                </div>
+                {# Host + infos #}
+                <div>
+                    {% if is_granted('ROLE_HOST') %}
+                        TODO
+                    {% else %}
+                        <a class="text-dark text-decoration-none" href="{{ path('room', { id : classroom.id}) }}">
+                            <p class="fw-bold mt-3 mb-1 text-dark">{{ classroom.name }}</p>
+                            <p class="text-dark mb-1">Capacité:
+                                <span class="fw-bold">{{ classroom.gauge }}</span>
+                            </p>
+                            <p class="text-dark mb-1">Étage:
+                                <span class="fw-bold">{{ classroom.floor }}</span>
+                            </p>
+                            <p class="text-dark">Détails
+                                <i class="bi bi-arrow-right"></i>
+                            </p>
+                        </a>
+                    {% endif %}
                 </div>
             </div>
         </div>
-    <?php endforeach; ?>
+    {% endfor %}
 </div>
