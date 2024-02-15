@@ -30,9 +30,13 @@ class Equipment
     #[ORM\OneToMany(targetEntity: User::class, mappedBy: 'equipment')]
     private Collection $admin;
 
+    #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]
+    private Collection $classrooms;
+
     public function __construct()
     {
         $this->admin = new ArrayCollection();
+        $this->classrooms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,6 +105,33 @@ class Equipment
             if ($admin->getEquipment() === $this) {
                 $admin->setEquipment(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Classroom>
+     */
+    public function getClassrooms(): Collection
+    {
+        return $this->classrooms;
+    }
+
+    public function addClassroom(Classroom $classroom): static
+    {
+        if (!$this->classrooms->contains($classroom)) {
+            $this->classrooms->add($classroom);
+            $classroom->addEquipment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClassroom(Classroom $classroom): static
+    {
+        if ($this->classrooms->removeElement($classroom)) {
+            $classroom->removeEquipment($this);
         }
 
         return $this;

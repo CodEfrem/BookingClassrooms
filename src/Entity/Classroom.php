@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ClassroomRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -46,6 +48,22 @@ class Classroom
 
     #[ORM\Column(nullable: true)]
     private ?bool $status = null;
+
+    #[ORM\ManyToOne(inversedBy: 'equipments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $admin = null;
+
+    #[ORM\ManyToMany(targetEntity: Equipment::class, inversedBy: 'classrooms')]
+    private Collection $equipments;
+
+    #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'classroom')]
+    private Collection $bookings;
+
+    public function __construct()
+    {
+        $this->equipments = new ArrayCollection();
+        $this->bookings = new ArrayCollection();
+    }
 
     
 
@@ -182,6 +200,72 @@ class Classroom
     public function setStatus(?bool $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getAdmin(): ?User
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?User $admin): static
+    {
+        $this->admin = $admin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipment>
+     */
+    public function getEquipments(): Collection
+    {
+        return $this->equipments;
+    }
+
+    public function addEquipment(Equipment $equipment): static
+    {
+        if (!$this->equipments->contains($equipment)) {
+            $this->equipments->add($equipment);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): static
+    {
+        $this->equipments->removeElement($equipment);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Booking>
+     */
+    public function getBookings(): Collection
+    {
+        return $this->bookings;
+    }
+
+    public function addBooking(Booking $booking): static
+    {
+        if (!$this->bookings->contains($booking)) {
+            $this->bookings->add($booking);
+            $booking->setClassroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBooking(Booking $booking): static
+    {
+        if ($this->bookings->removeElement($booking)) {
+            // set the owning side to null (unless already changed)
+            if ($booking->getClassroom() === $this) {
+                $booking->setClassroom(null);
+            }
+        }
 
         return $this;
     }
