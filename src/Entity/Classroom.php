@@ -20,7 +20,7 @@ class Classroom
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(
-        message: 'You should enter a title.'
+        message: 'You should enter a name.'
     )]
     private ?string $name = null;
 
