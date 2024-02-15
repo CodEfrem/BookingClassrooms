@@ -18,6 +18,9 @@ class Booking
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\Column(length: 50)]
+    private ?string $number = null;
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $start_date = null;
 
@@ -185,6 +188,18 @@ class Booking
                 $customer->setBooking(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(string $number): static
+    {
+        $this->number = $number;
 
         return $this;
     }
