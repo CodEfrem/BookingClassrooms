@@ -114,12 +114,12 @@ class Equipment
         return $this;
     }
 
-    public function getUser(): ?User
+    public function getAdmin(): ?User
     {
         return $this->admin;
     }
 
-    public function setUser(?User $admin): static
+    public function setAdmin(?User $admin): static
     {
         $this->admin = $admin;
 
