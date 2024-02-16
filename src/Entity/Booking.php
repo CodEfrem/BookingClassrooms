@@ -60,6 +60,13 @@ class Booking
         return $this->id;
     }
 
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function getNumber(): ?string
     {
         return $this->number;
@@ -140,13 +147,6 @@ class Booking
     public function setUpdatedAt(\DateTimeInterface $updated_at): static
     {
         $this->updated_at = $updated_at;
-
-        return $this;
-    }
-
-    public function setId(int $id): static
-    {
-        $this->id = $id;
 
         return $this;
     }

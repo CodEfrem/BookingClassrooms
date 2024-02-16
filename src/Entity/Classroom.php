@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Entity;
 
@@ -103,8 +103,6 @@ class Classroom
         $this->equipments = new ArrayCollection();
         $this->bookings = new ArrayCollection();
     }
-
-    
 
     public function getId(): ?int
     {
@@ -320,5 +318,4 @@ class Classroom
 
         return $this;
     }
-
 }
