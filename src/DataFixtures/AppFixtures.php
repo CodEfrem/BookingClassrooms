@@ -1,8 +1,12 @@
 <?php
+
+namespace App\DataFixtures;
+
 use App\Entity\Booking;
 use App\Entity\Classroom;
 use App\Entity\Customer;
 use App\Entity\Equipment;
+use App\Entity\Software;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -30,7 +34,6 @@ class AppFixtures extends Fixture
             
             $manager->persist($admin);
         }
-
 
         $clients = [];
 
@@ -66,7 +69,6 @@ class AppFixtures extends Fixture
             array_push($equipments, $equipment);
         }
 
-
         for ($i = 0; $i < 5; $i++) {
             $classroom = new Classroom();
             $classroom->setAdmin($admin);
@@ -88,8 +90,8 @@ class AppFixtures extends Fixture
 
         for ($i = 0; $i < 15; $i++) {
             $booking = new Booking();
-             
-            $booking->setClient($client->getEmail());
+            
+            $booking->setClient($client);
 
             $booking->setClient($faker->randomElement($clients));
             $booking->setStartDate($faker->dateTimeThisMonth);
@@ -115,5 +117,19 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
-    }
+    
+    for ($i = 0; $i < 10; $i++) {
+        $software = new Software();
+
+        $software->setSoftwareName($faker->text(20))
+        ->setVersion($faker->randomElement(['1.0', '2.0', '3.0', null]))
+        ->setDescription($faker->text)
+        ->setYear($faker->numberBetween(2000, 2022));
+
+        $manager->persist($software);
+        }
+    } 
+
 }
+
+
