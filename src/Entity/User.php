@@ -51,8 +51,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         maxMessage: 'Your name cannot be longer than {{ limit }} characters',
     )]
     private ?string $name = null;
+    #[ORM\Column(length: 100, nullable: true)]
 
-    #[ORM\Column(length: 100)]
     #[Assert\Length(
         min: 2,
         max: 100,
@@ -123,8 +123,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    // #[ORM\ManyToOne(inversedBy: 'admin')]
-    // private ?Equipment $equipment = null;
 
     #[ORM\OneToMany(targetEntity: Classroom::class, mappedBy: 'admin', orphanRemoval: true)]
     private Collection $classrooms;
@@ -370,7 +368,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->classrooms->add($classroom);
             $classroom->setAdmin($this);
         }
-
         return $this;
     }
 
@@ -382,7 +379,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $classroom->setAdmin(null);
             }
         }
-
         return $this;
     }
 
@@ -428,7 +424,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->equipments->contains($equipment)) {
             $this->equipments->add($equipment);
-            $equipment->setUser($this);
+            $equipment->setAdmin($this);
         }
 
         return $this;
