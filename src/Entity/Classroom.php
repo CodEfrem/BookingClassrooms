@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Entity;
 
@@ -20,7 +20,7 @@ class Classroom
 
     #[ORM\Column(length: 50)]
     #[Assert\NotBlank(
-        message: 'You should enter a title.'
+        message: 'You should enter a name.'
     )]
     private ?string $name = null;
 
@@ -103,8 +103,6 @@ class Classroom
         $this->equipments = new ArrayCollection();
         $this->bookings = new ArrayCollection();
     }
-
-    
 
     public function getId(): ?int
     {
@@ -320,5 +318,4 @@ class Classroom
 
         return $this;
     }
-
 }

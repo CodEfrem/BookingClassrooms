@@ -2,12 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\BookingRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\Customer;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\BookingRepository;
 use Symfony\UX\Turbo\Attribute\Broadcast;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
 #[Broadcast]
@@ -57,6 +58,25 @@ class Booking
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    public function getNumber(): ?string
+    {
+        return $this->number;
+    }
+
+    public function setNumber(string $number): static
+    {
+        $this->number = $number;
+
+        return $this;
     }
 
     public function getStartDate(): ?\DateTimeInterface
@@ -131,13 +151,6 @@ class Booking
         return $this;
     }
 
-    public function setId(int $id): static
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     public function getClient(): ?User
     {
         return $this->client;
@@ -192,15 +205,22 @@ class Booking
         return $this;
     }
 
-    public function getNumber(): ?string
+    // Convert start_date date to string
+    public function getStartDateString(): string
     {
-        return $this->number;
+        return $this->getStartDate()->format('d/m/Y');
     }
 
-    public function setNumber(string $number): static
+    // Convert end_date date to string
+    public function getEndDateString(): string
     {
-        $this->number = $number;
+        return $this->getEndDate()->format('d/m/Y');
+    }
 
-        return $this;
+    // Get the number of days between Start_date and End_Date
+    public function getDays(): int
+    {
+        $diff = $this->getStartDate()->diff($this->getEndDate());
+        return $diff->days;
     }
 }
