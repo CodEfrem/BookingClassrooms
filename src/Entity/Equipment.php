@@ -7,10 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\UX\Turbo\Attribute\Broadcast;
+
 
 #[ORM\Entity(repositoryClass: EquipmentRepository::class)]
-#[Broadcast]
 class Equipment
 {
     #[ORM\Id]
@@ -31,12 +30,20 @@ class Equipment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $admin = null;
 
+    // Ajout de la relation ManyToMany avec Software
+    #[ORM\ManyToMany(targetEntity: Software::class)]
+    #[ORM\JoinTable(
+        name: 'equipment_software',
+    )]
+    private Collection $software; // Fin de l'ajout
+
     #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]
     private Collection $classrooms;
 
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
+        $this->software = new ArrayCollection(); // Initialisation de la collection pour la relation ManyToMany avec Software
     }
 
     public function getId(): ?int
