@@ -31,11 +31,8 @@ class Equipment
     private ?User $admin = null;
 
     // Ajout de la relation ManyToMany avec Software
-    #[ORM\ManyToMany(targetEntity: Software::class)]
-    #[ORM\JoinTable(
-        name: 'equipment_software',
-    )]
-    private Collection $software; // Fin de l'ajout
+    #[ORM\ManyToMany(targetEntity: Software::class, mappedBy: 'equipments')]
+    private Collection $softwares; // Fin de l'ajout
 
     #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]
     private Collection $classrooms;
@@ -43,7 +40,7 @@ class Equipment
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
-        $this->software = new ArrayCollection(); // Initialisation de la collection pour la relation ManyToMany avec Software
+        $this->softwares = new ArrayCollection(); // Initialisation de la collection pour la relation ManyToMany avec Software
     }
 
     public function getId(): ?int
@@ -87,6 +84,18 @@ class Equipment
         return $this;
     }
 
+    public function getAdmin(): ?User
+    {
+        return $this->admin;
+    }
+
+    public function setAdmin(?User $admin): static
+    {
+        $this->admin = $admin;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Classroom>
      */
@@ -114,15 +123,31 @@ class Equipment
         return $this;
     }
 
-    public function getAdmin(): ?User
+    /**
+     * @return Collection<int, Software>
+     */
+    public function getSoftwares(): Collection
     {
-        return $this->admin;
+        return $this->softwares;
     }
 
-    public function setAdmin(?User $admin): static
+    public function addSoftware(Software $software): static
     {
-        $this->admin = $admin;
+        if (!$this->softwares->contains($software)) {
+            $this->softwares->add($software);
+            $software->addEquipment($this);
+        }
 
         return $this;
     }
+
+    public function removeSoftware(Software $software): static
+    {
+        if ($this->softwares->removeElement($software)) {
+            $software->removeEquipment($this);
+        }
+
+        return $this;
+    }
+
 }
