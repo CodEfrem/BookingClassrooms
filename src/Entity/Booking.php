@@ -6,12 +6,10 @@ use App\Entity\Customer;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\BookingRepository;
-use Symfony\UX\Turbo\Attribute\Broadcast;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: BookingRepository::class)]
-#[Broadcast]
 class Booking
 {
     #[ORM\Id]
