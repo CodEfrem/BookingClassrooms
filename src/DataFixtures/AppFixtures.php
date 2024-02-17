@@ -18,116 +18,104 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 10; $i++) {
             $admin = new User();
             $admin->setName('Martin')
             ->setEmail('admin@admin.fr')
-            ->setPassword($faker->password)
+            ->setRoles(['ROLE_ADMIN'])
+            ->setPassword('$2y$13$h4KU/rGrzXn0xj4dNN8Q7uRF.oH1YIA/51KGc/3ae/FoOL1fNI9VW')
             ->setCorporateName($faker->company)
             ->setSiret($faker->isbn13)
             ->setPhone($faker->phoneNumber)
             ->setAddress($faker->address)
             ->setCity($faker->city)
             ->setZip($faker->postcode)
-            ->setCountry($faker->country)
-            ->setRoles(['ROLE_ADMIN']);
-            
+            ->setCountry($faker->country);
             $manager->persist($admin);
-        }
 
         $clients = [];
-
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 8; $i++) {
             $client = new User();
             $client->setName($faker->name)
-            ->setEmail($faker->email)
-            ->setPassword($faker->password)
-            ->setCorporateName($faker->company)
-            ->setSiret($faker->isbn13)
-            ->setPhone($faker->phoneNumber)
-            ->setAddress($faker->address)
-            ->setCity($faker->city)
-            ->setZip($faker->postcode)
-            ->setCountry($faker->country)
-            ->setRoles(['ROLE_USER']);
-
+                ->setEmail($faker->email)
+                ->setRoles(['ROLE_USER'])
+                ->setPassword('$2y$13$h4KU/rGrzXn0xj4dNN8Q7uRF.oH1YIA/51KGc/3ae/FoOL1fNI9VW')
+                ->setCorporateName($faker->company)
+                ->setSiret($faker->isbn13)
+                ->setPhone($faker->phoneNumber)
+                ->setAddress($faker->address)
+                ->setCity($faker->city)
+                ->setZip($faker->postcode)
+                ->setCountry($faker->country);
             $manager->persist($client);
 
             array_push($clients, $client);
         }
 
         $equipments = [];
-
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $equipment = new Equipment();
-            $equipment->setAdmin($admin);
-            $equipment->setOption($faker->boolean);
-            $equipment->setCreatedAt($faker->dateTimeThisYear);
-            $equipment->setUpdatedAt($faker->dateTimeThisYear);
-        
+            $equipment->setAdmin($admin)
+                ->setOption($faker->boolean)
+                ->setCreatedAt($faker->dateTimeThisYear)
+                ->setUpdatedAt($faker->dateTimeThisYear);
             $manager->persist($equipment);
             array_push($equipments, $equipment);
         }
 
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $classroom = new Classroom();
-            $classroom->setAdmin($admin);
-            $classroom->setName('Classroom ' . $i);
-            $classroom->setDescription($faker->text);
-            $classroom->setAddress($faker->address);
-            $classroom->setCity($faker->city);
-            $classroom->setZip($faker->postcode);
-            $classroom->setCountry($faker->country);
-            $classroom->setGauge($faker->randomNumber(2));
-            $classroom->setFloor($faker->word);
-            $classroom->setParking($faker->boolean);
-            $classroom->setPrice($faker->randomNumber(3));
-            $classroom->setStatus($faker->boolean);
-            $classroom->addEquipment($faker->randomElement($equipments));
-
+            $classroom->setAdmin($admin)
+                ->setName('Classroom ' . $i)
+                ->setDescription($faker->text)
+                ->setAddress($faker->address)
+                ->setCity($faker->city)
+                ->setZip($faker->postcode)
+                ->setCountry($faker->country)
+                ->setGauge($faker->randomNumber(2))
+                ->setFloor($faker->word)
+                ->setParking($faker->boolean)
+                ->setPrice($faker->randomNumber(3))
+                ->setStatus($faker->boolean)
+                ->setImage(rand(0,1) ? 'default.jpg' : 'default-1.jpg')
+                ->addEquipment($faker->randomElement($equipments));
             $manager->persist($classroom);
         }
 
-        for ($i = 0; $i < 15; $i++) {
+        for ($i = 0; $i < 5; $i++) {
             $booking = new Booking();
-            
-            $booking->setClient($client);
-
-            $booking->setClient($faker->randomElement($clients));
-            $booking->setStartDate($faker->dateTimeThisMonth);
-            $booking->setEndDate($faker->dateTimeThisMonth);
-            $booking->setAmount($faker->randomFloat(2, 50, 500));
-            $booking->setStatus($faker->boolean);
-            $booking->setCreatedAt($faker->dateTimeThisYear);
-            $booking->setUpdatedAt($faker->dateTimeThisYear);
-            $booking->setNumber('Booking-' . $i);
-
+            $booking->setClient($client)
+                ->setClient($faker->randomElement($clients))
+                ->setStartDate($faker->dateTimeThisMonth)
+                ->setEndDate($faker->dateTimeThisMonth)
+                ->setAmount($faker->randomFloat(2, 50, 500))
+                ->setStatus($faker->boolean)
+                ->setCreatedAt($faker->dateTimeThisYear)
+                ->setUpdatedAt($faker->dateTimeThisYear)
+                ->setNumber('Booking-' . $i);
             $manager->persist($booking);
 
 
-            for ($j = 0; $j < 2; $j++) {
+            for ($j = 0; $j < 5; $j++) {
                 $customer = new Customer();
-
-                $customer->setEffective($faker->randomNumber(1));
-                $customer->setCreatedAt($faker->dateTimeThisYear);
-                $customer->setBooking($booking);
-
+                $customer->setEffective($faker->randomNumber(1))
+                    ->setCreatedAt($faker->dateTimeThisYear)
+                    ->setBooking($booking);
                 $manager->persist($customer);
             }
+
+            for ($i = 0; $i < 5; $i++) {
+                $software = new Software();
+                $software->setSoftwareName($faker->text(20))
+                    ->setVersion($faker->randomElement(['1.0', '2.0', '3.0', null]))
+                    ->setDescription($faker->text)
+                    ->setYear($faker->numberBetween(2000, 2022));
+                $manager->persist($software);
+                }
         }
 
+        // Flush
         $manager->flush();
     
-    for ($i = 0; $i < 10; $i++) {
-        $software = new Software();
-
-        $software->setSoftwareName($faker->text(20))
-        ->setVersion($faker->randomElement(['1.0', '2.0', '3.0', null]))
-        ->setDescription($faker->text)
-        ->setYear($faker->numberBetween(2000, 2022));
-
-        $manager->persist($software);
-        }
     } 
 
 }
