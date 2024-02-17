@@ -5,10 +5,8 @@ namespace App\Entity;
 use App\Repository\CustomerRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\UX\Turbo\Attribute\Broadcast;
 
 #[ORM\Entity(repositoryClass: CustomerRepository::class)]
-#[Broadcast]
 class Customer
 {
     #[ORM\Id]

@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\SoftwareRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\SoftwareRepository;
+use Doctrine\Common\Collections\Collection;
 
 
 #[ORM\Entity(repositoryClass: SoftwareRepository::class)]
@@ -25,6 +26,9 @@ class Software
 
     #[ORM\Column(type: 'integer', nullable: true)]
     private ?int $year = null;
+
+    #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'softwares')]
+    private Collection $equipments; // Fin de l'ajout
 
 
     public function getId(): ?int
@@ -76,6 +80,30 @@ class Software
     public function setYear(?int $year): self
     {
         $this->year = $year;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipment>
+     */
+    public function getEquipments(): Collection
+    {
+        return $this->equipments;
+    }
+
+    public function addEquipment(Equipment $equipment): static
+    {
+        if (!$this->equipments->contains($equipment)) {
+            $this->equipments->add($equipment);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): static
+    {
+        $this->equipments->removeElement($equipment);
 
         return $this;
     }
