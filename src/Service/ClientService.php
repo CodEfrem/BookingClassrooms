@@ -3,7 +3,7 @@
 namespace App\Service;
 
 
-class ProfileService
+class ClientService
 {
     public function updateProfile($form, $user, $em)
     {
