@@ -20,28 +20,29 @@ class AppFixtures extends Fixture
 
             $admin = new User();
             $admin->setName('Martin')
-            ->setEmail('admin@admin.fr')
-            ->setRoles(['ROLE_ADMIN'])
-            ->setPassword('$2y$13$h4KU/rGrzXn0xj4dNN8Q7uRF.oH1YIA/51KGc/3ae/FoOL1fNI9VW')
-            ->setCorporateName($faker->company)
-            ->setSiret($faker->isbn13)
-            ->setPhone($faker->phoneNumber)
-            ->setAddress($faker->address)
-            ->setCity($faker->city)
-            ->setZip($faker->postcode)
-            ->setCountry($faker->country);
+                ->setEmail('admin@admin.fr')
+                ->setRoles(['ROLE_ADMIN'])
+                ->setPassword('$2y$13$h4KU/rGrzXn0xj4dNN8Q7uRF.oH1YIA/51KGc/3ae/FoOL1fNI9VW')
+                ->setCorporateName($faker->company)
+                ->setSiret($faker->siret)
+                ->setPhone($faker->phoneNumber)
+                ->setAddress($faker->address)
+                ->setCity($faker->city)
+                ->setZip($faker->postcode)
+                ->setCountry($faker->country);
             $manager->persist($admin);
 
         $clients = [];
         for ($i = 0; $i < 8; $i++) {
+            $name = $faker->Lastname();
             $client = new User();
-            $client->setName($faker->name)
-                ->setEmail($faker->email)
+            $client->setName($name)
+                ->setCorporateName($faker->company)
+                ->setEmail($name . '@' . $faker->safeEmailDomain())
                 ->setRoles(['ROLE_USER'])
                 ->setPassword('$2y$13$h4KU/rGrzXn0xj4dNN8Q7uRF.oH1YIA/51KGc/3ae/FoOL1fNI9VW')
-                ->setCorporateName($faker->company)
-                ->setSiret($faker->isbn13)
-                ->setPhone($faker->phoneNumber)
+                ->setSiret($faker->siret)
+                ->setPhone($faker->phoneNumber) 
                 ->setAddress($faker->address)
                 ->setCity($faker->city)
                 ->setZip($faker->postcode)
@@ -72,9 +73,9 @@ class AppFixtures extends Fixture
                 ->setZip($faker->postcode)
                 ->setCountry($faker->country)
                 ->setGauge($faker->randomNumber(2))
-                ->setFloor($faker->word)
+                ->setFloor($faker->numberBetween(0, 10))
                 ->setParking($faker->boolean)
-                ->setPrice($faker->randomNumber(3))
+                ->setPrice($faker->numberBetween(300, 5000))
                 ->setStatus($faker->boolean)
                 ->setImage(rand(0,1) ? 'default.jpg' : 'default-1.jpg')
                 ->addEquipment($faker->randomElement($equipments));
@@ -84,10 +85,10 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $booking = new Booking();
             $booking->setClient($client)
-                ->setClient($faker->randomElement($clients))
+                ->setClassroom($classroom)
                 ->setStartDate($faker->dateTimeThisMonth)
-                ->setEndDate($faker->dateTimeThisMonth)
-                ->setAmount($faker->randomFloat(2, 50, 500))
+                ->setEndDate($faker->dateTimeThisYear('+5 months'))
+                ->setAmount($faker->randomFloat(2, 300, 50000))
                 ->setStatus($faker->boolean)
                 ->setCreatedAt($faker->dateTimeThisYear)
                 ->setUpdatedAt($faker->dateTimeThisYear)
@@ -97,7 +98,7 @@ class AppFixtures extends Fixture
 
             for ($j = 0; $j < 5; $j++) {
                 $customer = new Customer();
-                $customer->setEffective($faker->randomNumber(1))
+                $customer->setEffective($faker->numberBetween(10, 30))
                     ->setCreatedAt($faker->dateTimeThisYear)
                     ->setBooking($booking);
                 $manager->persist($customer);
