@@ -18,6 +18,7 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create('fr_FR');
 
+        // Set admin
             $admin = new User();
             $admin->setName('Martin')
                 ->setEmail('admin@admin.fr')
@@ -32,13 +33,14 @@ class AppFixtures extends Fixture
                 ->setCountry($faker->country);
             $manager->persist($admin);
 
+            // Set client
         $clients = [];
         for ($i = 0; $i < 8; $i++) {
             $name = $faker->Lastname();
             $client = new User();
             $client->setName($name)
                 ->setCorporateName($faker->company)
-                ->setEmail($name . '@' . $faker->safeEmailDomain())
+                ->setEmail($name . '@' . $faker->freeEmailDomain())
                 ->setRoles(['ROLE_USER'])
                 ->setPassword('$2y$13$h4KU/rGrzXn0xj4dNN8Q7uRF.oH1YIA/51KGc/3ae/FoOL1fNI9VW')
                 ->setSiret($faker->siret)
@@ -52,6 +54,7 @@ class AppFixtures extends Fixture
             array_push($clients, $client);
         }
 
+        // Set equipments
         $equipments = [];
         for ($i = 0; $i < 5; $i++) {
             $equipment = new Equipment();
@@ -63,6 +66,7 @@ class AppFixtures extends Fixture
             array_push($equipments, $equipment);
         }
 
+        // Set classrooms
         for ($i = 0; $i < 10; $i++) {
             $classroom = new Classroom();
             $classroom->setAdmin($admin)
