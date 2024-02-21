@@ -5,9 +5,7 @@ namespace App\Entity;
 use App\Repository\EquipmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
 
 #[ORM\Entity(repositoryClass: EquipmentRepository::class)]
 class Equipment
@@ -20,27 +18,23 @@ class Equipment
     #[ORM\Column]
     private ?bool $option = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'equipments')]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $admin = null;
 
-    // Ajout de la relation ManyToMany avec Software
-    #[ORM\ManyToMany(targetEntity: Software::class, mappedBy: 'equipments')]
-    private Collection $softwares; // Fin de l'ajout
-
-    #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]
+    // Ajout de la relation ManyToMany avec Classroom
+    #[ORM\ManyToMany(targetEntity: Classroom::class, inversedBy: 'equipments')]
     private Collection $classrooms;
 
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
-        $this->softwares = new ArrayCollection(); // Initialisation de la collection pour la relation ManyToMany avec Software
     }
 
     public function getId(): ?int
@@ -48,6 +42,7 @@ class Equipment
         return $this->id;
     }
 
+    
     public function isOption(): ?bool
     {
         return $this->option;
@@ -122,32 +117,4 @@ class Equipment
 
         return $this;
     }
-
-    /**
-     * @return Collection<int, Software>
-     */
-    public function getSoftwares(): Collection
-    {
-        return $this->softwares;
-    }
-
-    public function addSoftware(Software $software): static
-    {
-        if (!$this->softwares->contains($software)) {
-            $this->softwares->add($software);
-            $software->addEquipment($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSoftware(Software $software): static
-    {
-        if ($this->softwares->removeElement($software)) {
-            $software->removeEquipment($this);
-        }
-
-        return $this;
-    }
-
 }

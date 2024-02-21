@@ -59,6 +59,7 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $equipment = new Equipment();
             $equipment->setAdmin($admin)
+            
                 ->setOption($faker->boolean)
                 ->setCreatedAt($faker->dateTimeThisYear)
                 ->setUpdatedAt($faker->dateTimeThisYear);
