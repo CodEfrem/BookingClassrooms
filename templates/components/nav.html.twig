@@ -1,74 +1,30 @@
-<!DOCTYPE html>
-<html class="no-js" lang="fr">
-<head>
-<script>
-    $(document).ready(function() {
-        $(window).scroll(function() {
-            if ($(this).scrollTop() > 50) { // Si le défilement est supérieur à 50 pixels
-                $('#navbar').addClass('bg-black'); // Ajoute la classe bg-black à la barre de navigation
-            } else {
-                $('#navbar').removeClass('bg-black'); // Retire la classe bg-black de la barre de navigation
-            }
-        });
-    });
-</script>
-
-
-</head>
-<body>
-    <header id="navbar" class="navbar-fixed-top">
-        <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    <a class="navbar-brand" href="/">
-                        <img src="images\logo.png" alt="BookingClassrooms Logo" style="width: 450px;">
-                    </a>
-                </div>
-                <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-                    <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li class="scroll active">
-                            <a href="/">home</a>
-                        </li>
-                        <li class="scroll">
-                            <a href={{ path('classrooms') }}>classrooms</a>
-                        </li>
-                        <li class="scroll">
-                            <a href="#contact">contact</a>
-                        </li>
-                        {% if app.user %}
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ app.user.userIdentifier }}</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href={{ path('account') }}>My account</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" {#  href={{ path('bookings') }} #}>My bookings</a>
-                                    </li>
-                                    {% if is_granted('ROLE_ADMIN') %}
-                                        <li>
-                                            <a class="dropdown-item" {#href={{ path('admin') }}#}>Admin dashboard</a>
-                                        </li>
-                                    {% endif %}
-                                    <li>
-                                        <hr class="dropdown-divider"></li>
-                                    <li>
-                                        <a class="dropdown-item" href={{ path('app_logout') }}>Logout</a>
-                                    </li>
-                                </ul>
-                            </li>
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ path('app_login') }}">Login</a>
-                            </li>
-                        {% endif %}
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-</body>
-</html>
+<header>
+<section id="home" class="welcome-hero"></header>
+    <div class="top-area">
+        <div class="header-area">
+           <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+                    <div class="container">
+                        <div class="navbar-header">
+                               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                            <img src="public\images\logo.png" alt="" srcset="">
+                        </button>
+                            <a class="navbar-brand" href="index.html"><span></span></a>
+                        </div>
+                        <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                                <li class=" scroll active"><a href="/">home</a></li>
+                                <li class="scroll"><a href="#service">service</a></li>
+                                <li class="scroll"><a href="#contact">contact</a></li>
+                                {% if app.user %}
+                                    {# Affiche les liens uniquement si un utilisateur est connecté #}
+                                    <li class="scroll"><a href={{ path('classrooms') }}>classrooms</a></li>
+                                    <li class="scroll"><a class="dropdown-item" href={{ path('app_logout') }}>Logout</a></li>
+                                {% endif %}
+                            </ul><!--/.nav -->
+                        </div><!-- /.navbar-collapse -->
+                    </div><!--/.container-->
+                </nav>
+        </div><!--/.header-area-->
+        <div class="clearfix"></div>
+    </div><!-- /.top-area-->
+    <!-- top-area End -->
