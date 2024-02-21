@@ -46,12 +46,12 @@ class Equipment
         return $this->id;
     }
 
-    public function isOption(): ?bool
+    public function isOption(): ?string
     {
         return $this->option;
     }
 
-    public function setOption(bool $option): static
+    public function setOption(string $option): static
     {
         $this->option = $option;
 
