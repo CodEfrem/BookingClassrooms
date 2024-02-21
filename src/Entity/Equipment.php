@@ -30,17 +30,15 @@ class Equipment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $admin = null;
 
-    // Ajout de la relation ManyToMany avec Software
-    #[ORM\ManyToMany(targetEntity: Software::class, mappedBy: 'equipments')]
-    private Collection $softwares; // Fin de l'ajout
-
     #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]
     private Collection $classrooms;
+
+    #[ORM\OneToMany(targetEntity: Software::class, mappedBy: 'equipment')]
+    private Collection $softwares;
 
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
-        $this->softwares = new ArrayCollection(); // Initialisation de la collection pour la relation ManyToMany avec Software
     }
 
     public function getId(): ?int
@@ -135,7 +133,7 @@ class Equipment
     {
         if (!$this->softwares->contains($software)) {
             $this->softwares->add($software);
-            $software->addEquipment($this);
+            $software->setEquipment($this);
         }
 
         return $this;
@@ -144,7 +142,10 @@ class Equipment
     public function removeSoftware(Software $software): static
     {
         if ($this->softwares->removeElement($software)) {
-            $software->removeEquipment($this);
+            // set the owning side to null (unless already changed)
+            if ($software->getEquipment() === $this) {
+                $software->setEquipment(null);
+            }
         }
 
         return $this;
