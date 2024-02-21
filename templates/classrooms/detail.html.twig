@@ -1,9 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Details Classrooms
+{% block title %}Classroom details
 {% endblock %}
 
-{% block body %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="css/app.css">
+    <!-- Assurez-vous que le chemin vers le fichier app.css est correct -->
+    <style>
+        /* Ajoutez ici les styles spécifiques à votre modèle */
+        .card {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-img-top {
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+            object-fit: cover;
+            height: 200px;
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .host-info img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+    </style>
+{% endblock %}
+{% block content %}
     <div class="col-md-4 col-sm-6 mb-5">
         <div class="card h-100 shadow-sm">
             <img src="images/salle.jpg" class="card-img-top rounded-top" alt="{{ classroom.name }}">
@@ -13,7 +43,6 @@
                         <img src="images/admin.jpg" alt="{{ classroom.admin.name }}" class="rounded-pill">
                         <span class="ms-2">{{ classroom.admin.name }}</span>
                     </div>
-                    
                 </div>
                 <h5 class="card-title mt-3 mb-2">{{ classroom.name }}</h5>
                 <p class="card-text mb-3">{{ classroom.description }}</p>

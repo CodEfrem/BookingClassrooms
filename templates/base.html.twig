@@ -16,18 +16,11 @@
 			<link rel="stylesheet" href="css/bootstrap.min.css">
 			<link rel="stylesheet" href="css/bootsnav.css">
 			<link rel="stylesheet" href="css/app.css">
+			<link rel="stylesheet" href="css/style.css">
 			<link rel="stylesheet" href="css/responsive.css">
+			
 		{% endblock %}
-		{% block javascripts %}
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-			<script src="js/bootstrap.min.js"></script>
-			<script src="js/bootsnav.js"></script>
-			<script src="js/owl.carousel.min.js"></script>
-			<script src="js/custom.js"></script>
-			<script src="js/jquery.js"></script>
-			<script src="js/feather.min.js"></script>
-		{% endblock %}
+		
 	</head>
 
 	<body>
@@ -41,6 +34,14 @@
 		{% block footer %}
 			{% include 'components/footer.html.twig' %}
 		{% endblock %}
-
+{% block javascripts %}
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+			<script src="js/bootstrap.min.js"></script>
+			<script src="js/bootsnav.js"></script>
+			<script src="js/owl.carousel.min.js"></script>
+			<script src="js/custom.js"></script>
+			<script src="js/feather.min.js"></script>
+		{% endblock %}
 	</body>
 </html>

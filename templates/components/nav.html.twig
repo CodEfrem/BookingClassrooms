@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html class="no-js" lang="fr">
 <head>
-    <!-- Mettez vos balises meta, liens CSS, etc. ici -->
-    <script>
-        $(document).ready(function() {
-            $(window).scroll(function() {
-                if ($(this).scrollTop() > 50) { // Défilement de plus de 50 pixels
-                    $('#navbar').addClass('bg-black'); // Ajoute la classe bg-black à la barre de navigation
-                } else {
-                    $('#navbar').removeClass('bg-black'); // Retire la classe bg-black de la barre de navigation
-                }
-            });
+<script>
+    $(document).ready(function() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) { // Si le défilement est supérieur à 50 pixels
+                $('#navbar').addClass('bg-black'); // Ajoute la classe bg-black à la barre de navigation
+            } else {
+                $('#navbar').removeClass('bg-black'); // Retire la classe bg-black de la barre de navigation
+            }
         });
-    </script>
+    });
+</script>
+
+
 </head>
 <body>
     <header id="navbar" class="navbar-fixed-top">
@@ -37,26 +38,33 @@
                         <li class="scroll">
                             <a href="#contact">contact</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Menu</a>
-                            <ul class="dropdown-menu">
-                                <li>
-                                    <a class="dropdown-item" href={{ path('account') }}>My account</a>
-                                </li>
-                                <li>
-                                    <a class="dropdown-item" {#  href={{ path('bookings') }} #}>My bookings</a>
-                                </li>
-                                {# {% if is_granted('ROLE_ADMIN') %} #}
+                        {% if app.user %}
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">{{ app.user.userIdentifier }}</a>
+                                <ul class="dropdown-menu">
                                     <li>
-                                        <a class="dropdown-item" {#href={{ path('admin') }}#}>Admin dashboard</a>
+                                        <a class="dropdown-item" href={{ path('account') }}>My account</a>
                                     </li>
-                                {# {% endif %} #}
-                                <li><hr class="dropdown-divider"></li>
-                                <li>
-                                    <a class="dropdown-item" href={{ path('app_logout') }}>Logout</a>
-                                </li>
-                            </ul>
-                        </li>
+                                    <li>
+                                        <a class="dropdown-item" {#  href={{ path('bookings') }} #}>My bookings</a>
+                                    </li>
+                                    {% if is_granted('ROLE_ADMIN') %}
+                                        <li>
+                                            <a class="dropdown-item" {#href={{ path('admin') }}#}>Admin dashboard</a>
+                                        </li>
+                                    {% endif %}
+                                    <li>
+                                        <hr class="dropdown-divider"></li>
+                                    <li>
+                                        <a class="dropdown-item" href={{ path('app_logout') }}>Logout</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>

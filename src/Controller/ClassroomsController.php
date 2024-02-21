@@ -33,22 +33,25 @@ class ClassroomsController extends AbstractController
         ]);
     }
 
-    #[Route('/classrooms-detail/{id}', name: 'classroom')] // Ajoutez l'identifiant dans l'URL
-    public function classroom($id): Response
-    {
-        // Récupère les détails de la salle de classe spécifiée par son identifiant
-        $classroom = $this->managerRegistry
-            ->getRepository(Classroom::class)
-            ->find($id);
-        
-        // Vérifie si la salle de classe existe
-        if (!$classroom) {
-            throw $this->createNotFoundException('Classroom not found');
-        }
+    #[Route('/classrooms-detail/{id}', name: 'classroom')]
+public function classroom($id): Response
+{
+    // Récupère les détails de la salle de classe spécifiée par son identifiant
+    $classroom = $this->managerRegistry
+        ->getRepository(Classroom::class)
+        ->find($id);
     
-        // Rend la vue Twig en passant les détails de la salle de classe récupérée
-        return $this->render('classrooms/detail.html.twig', [
-            'classroom' => $classroom,
-        ]);
+    // Vérifie si la salle de classe existe
+    if (!$classroom) {
+        throw $this->createNotFoundException('Classroom not found');
     }
+
+    // Rend la vue Twig en passant les détails de la salle de classe récupérée
+    return $this->render('classrooms/detail.html.twig', [
+        'classroom' => $classroom,
+    ]);
+}
+
+    
+    
 }
