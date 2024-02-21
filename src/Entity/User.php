@@ -375,7 +375,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function removeEquipment(Classroom $classroom): static
+    public function removeClassroom(Classroom $classroom): static
     {
         if ($this->classrooms->removeElement($classroom)) {
             // set the owning side to null (unless already changed)
@@ -430,6 +430,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->equipments->contains($equipment)) {
             $this->equipments->add($equipment);
             $equipment->setAdmin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): static
+    {
+        if ($this->equipments->removeElement($equipment)) {
+            // set the owning side to null (unless already changed)
+            if ($equipment->getAdmin() === $this) {
+                $equipment->setAdmin(null);
+            }
         }
 
         return $this;
