@@ -18,7 +18,7 @@ class Equipment
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?bool $option = null;
+    private ?string $option = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
