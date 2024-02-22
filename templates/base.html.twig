@@ -24,24 +24,29 @@
 	</head>
 
 	<body>
-		{% include 'components/nav.html.twig' %}	
-{% block body %}
-    {% if app.request.attributes.get('_route') == 'app_home' %}
-        {% include 'components/home.html.twig' %}
-    {% endif %}
-{% endblock %}
+		<header>
+			{% include 'components/nav.html.twig' %}
+		</header>
+				
+			{% block body %}
+				{% if app.request.attributes.get('_route') == 'app_home' %}
+					{% include 'components/home.html.twig' %}
+				{% endif %}
+			{% endblock %}
 
-		{% block footer %}
-			{% include 'components/footer.html.twig' %}
-		{% endblock %}
-{% block javascripts %}
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
-			<script src="js/bootstrap.min.js"></script>
-			<script src="js/bootsnav.js"></script>
-			<script src="js/owl.carousel.min.js"></script>
-			<script src="js/custom.js"></script>
-			<script src="js/feather.min.js"></script>
-		{% endblock %}
+			{% block footer %}
+				{% include 'components/footer.html.twig' %}
+			{% endblock %}
+
+			{% block javascripts %}
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+						<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+						<script src="js/jquery.js"></script>
+						<script src="js/bootstrap.min.js"></script>
+						<script src="js/bootsnav.js"></script>
+						<script src="js/owl.carousel.min.js"></script>
+						<script src="js/custom.js"></script>
+						<script src="js/feather.min.js"></script>
+			{% endblock %}
 	</body>
 </html>
