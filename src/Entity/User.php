@@ -124,9 +124,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
 
-    // #[ORM\ManyToOne(inversedBy: 'admin')]
-    // private ?Equipment $equipment = null;
-
     #[ORM\OneToMany(targetEntity: Classroom::class, mappedBy: 'admin', orphanRemoval: true)]
     private Collection $classrooms;
 
@@ -450,6 +447,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // toString() allows to use the object as a string
     public function toString(): string
     {
-        return $this->getName();
+        return $this->name;
     }
 }
