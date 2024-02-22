@@ -24,7 +24,9 @@
         <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
     </div>
 
-    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+    <input type="hidden" name="_csrf_token"
+        value="{{ csrf_token('authenticate') }}"
+    >
 
     <button class="btn btn-primary btn-block" type="submit">Sign in</button>
     <a href="{{ path('app_register') }}">register</a>

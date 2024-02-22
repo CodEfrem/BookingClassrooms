@@ -64,7 +64,7 @@ class Classroom
     private ?string $country = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $gauge = null;
+    private ?int $gauge = null;
 
     #[ORM\Column(length: 255)]
     private ?string $floor = null;
@@ -85,7 +85,7 @@ class Classroom
     private ?bool $status = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    private ?string $image = 'default.png';
 
     #[ORM\ManyToOne(inversedBy: 'classrooms')]
     #[ORM\JoinColumn(nullable: false)]
@@ -181,12 +181,12 @@ class Classroom
         return $this;
     }
 
-    public function getGauge(): ?string
+    public function getGauge(): ?int
     {
         return $this->gauge;
     }
 
-    public function setGauge(string $gauge): static
+    public function setGauge(int $gauge): static
     {
         $this->gauge = $gauge;
 
@@ -237,6 +237,18 @@ class Classroom
     public function setStatus(?bool $status): static
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
@@ -307,15 +319,10 @@ class Classroom
         return $this;
     }
 
-    public function getImage(): ?string
+    // __toString() allows to use the object as a string
+    public function __toString(): string
     {
-        return $this->image;
+        return $this->name;
     }
 
-    public function setImage(?string $image): static
-    {
-        $this->image = $image;
-
-        return $this;
-    }
 }

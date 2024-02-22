@@ -16,7 +16,7 @@ class Equipment
     private ?int $id = null;
 
     #[ORM\Column]
-    private ?bool $option = null;
+    private ?string $option = null;
 
     #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $created_at = null;
@@ -28,9 +28,11 @@ class Equipment
     #[ORM\JoinColumn(nullable: false)]
     private ?User $admin = null;
 
-    // Ajout de la relation ManyToMany avec Classroom
-    #[ORM\ManyToMany(targetEntity: Classroom::class, inversedBy: 'equipments')]
+    #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]
     private Collection $classrooms;
+
+    #[ORM\OneToMany(targetEntity: Software::class, mappedBy: 'equipment')]
+    private Collection $softwares;
 
     public function __construct()
     {
@@ -42,13 +44,12 @@ class Equipment
         return $this->id;
     }
 
-    
-    public function isOption(): ?bool
+    public function isOption(): ?string
     {
         return $this->option;
     }
 
-    public function setOption(bool $option): static
+    public function setOption(string $option): static
     {
         $this->option = $option;
 
@@ -117,4 +118,40 @@ class Equipment
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Software>
+     */
+    public function getSoftwares(): Collection
+    {
+        return $this->softwares;
+    }
+
+    public function addSoftware(Software $software): static
+    {
+        if (!$this->softwares->contains($software)) {
+            $this->softwares->add($software);
+            $software->setEquipment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoftware(Software $software): static
+    {
+        if ($this->softwares->removeElement($software)) {
+            // set the owning side to null (unless already changed)
+            if ($software->getEquipment() === $this) {
+                $software->setEquipment(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function __toString() {
+
+        return $this->option; // Retourne le nom de l'équipement
+    }
+
 }

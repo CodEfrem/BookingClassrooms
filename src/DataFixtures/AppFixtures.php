@@ -50,21 +50,40 @@ class AppFixtures extends Fixture
                 ->setZip($faker->postcode)
                 ->setCountry($faker->country);
             $manager->persist($client);
-
             array_push($clients, $client);
         }
 
+        // Set software
+        $softwares = [];
+        for ($i = 0; $i < 8; $i++) {
+            $software = new Software();
+            $software->setSoftwareName($faker->word)
+                ->setVersion($faker->semver)
+                ->setDescription($faker->text)
+                ->setYear($faker->numberBetween(2000, 2022));
+            $manager->persist($software);
+            array_push($softwares, $software);
+            }
+
         // Set equipments
         $equipments = [];
-        for ($i = 0; $i < 5; $i++) {
+        for ($i = 0; $i < 10; $i++) {
             $equipment = new Equipment();
             $equipment->setAdmin($admin)
-            
-                ->setOption($faker->boolean)
+                ->setOption($faker->word)
+                // ->addSoftware($faker->randomElement($softwares))
                 ->setCreatedAt($faker->dateTimeThisYear)
                 ->setUpdatedAt($faker->dateTimeThisYear);
             $manager->persist($equipment);
             array_push($equipments, $equipment);
+        }
+
+        // Set classrooms
+        for ($j = 0; $j < 5; $j++) {
+            $customer = new Customer();
+            $customer->setEffective($faker->numberBetween(10, 30))
+                ->setCreatedAt($faker->dateTimeThisYear);
+            $manager->persist($customer);
         }
 
         // Set classrooms
@@ -90,33 +109,16 @@ class AppFixtures extends Fixture
         for ($i = 0; $i < 5; $i++) {
             $booking = new Booking();
             $booking->setClient($client)
+                ->setNumber('Booking-' . $i)
                 ->setClassroom($classroom)
                 ->setStartDate($faker->dateTimeThisMonth)
                 ->setEndDate($faker->dateTimeThisYear('+5 months'))
                 ->setAmount($faker->randomFloat(2, 300, 50000))
                 ->setStatus($faker->boolean)
+                ->addCustomer($customer)
                 ->setCreatedAt($faker->dateTimeThisYear)
-                ->setUpdatedAt($faker->dateTimeThisYear)
-                ->setNumber('Booking-' . $i);
+                ->setUpdatedAt($faker->dateTimeThisYear);
             $manager->persist($booking);
-
-
-            for ($j = 0; $j < 5; $j++) {
-                $customer = new Customer();
-                $customer->setEffective($faker->numberBetween(10, 30))
-                    ->setCreatedAt($faker->dateTimeThisYear)
-                    ->setBooking($booking);
-                $manager->persist($customer);
-            }
-
-            for ($i = 0; $i < 5; $i++) {
-                $software = new Software();
-                $software->setSoftwareName($faker->text(20))
-                    ->setVersion($faker->randomElement(['1.0', '2.0', '3.0', null]))
-                    ->setDescription($faker->text)
-                    ->setYear($faker->numberBetween(2000, 2022));
-                $manager->persist($software);
-                }
         }
 
         // Flush
