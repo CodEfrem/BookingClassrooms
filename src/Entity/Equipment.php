@@ -151,4 +151,9 @@ class Equipment
         return $this;
     }
 
+    public function __toString() {
+
+        return $this->option; // Retourne le nom de l'équipement
+    }
+
 }

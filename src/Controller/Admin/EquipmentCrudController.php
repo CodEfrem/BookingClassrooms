@@ -23,7 +23,7 @@ class EquipmentCrudController extends AbstractCrudController
         return [
             FormField::addTab('Identification')
                 ->setIcon('user')->addCssClass('optional')
-                ->setHelp('All information about the user'),
+                ->setHelp('All information about the equipment'),
             IdField::new('id')->hideOnIndex(),
             TextField::new('option'),
             DateField::new('created_at'),

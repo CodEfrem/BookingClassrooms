@@ -85,7 +85,7 @@ class Classroom
     private ?bool $status = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $image = null;
+    private ?string $image = 'default.png';
 
     #[ORM\ManyToOne(inversedBy: 'classrooms')]
     #[ORM\JoinColumn(nullable: false)]
@@ -317,6 +317,12 @@ class Classroom
         }
 
         return $this;
+    }
+
+    // __toString() allows to use the object as a string
+    public function __toString(): string
+    {
+        return $this->name;
     }
 
 }

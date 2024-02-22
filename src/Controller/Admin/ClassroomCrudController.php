@@ -28,7 +28,7 @@ class ClassroomCrudController extends AbstractCrudController
         return [
             FormField::addTab('Identification')
                 ->setIcon('home')->addCssClass('optional')
-                ->setHelp('All information about the room'),
+                ->setHelp('All information about the classroom'),
             IdField::new('id')->hideOnIndex(),
             TextField::new('name'),
             TextEditorField::new('description'),

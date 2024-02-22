@@ -70,4 +70,8 @@ class Customer
 
         return $this;
     }
+    public function __toString() {
+
+        return $this->effective; // Retourne le nom de l'équipement
+    }
 }

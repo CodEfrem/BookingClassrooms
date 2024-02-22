@@ -26,7 +26,7 @@ class BookingCrudController extends AbstractCrudController
         return [
             FormField::addTab('Identification')
                 ->setIcon('home')->addCssClass('optional')
-                ->setHelp('All information about the room'),
+                ->setHelp('All information about the booking'),
             IdField::new('id')->hideOnIndex(),
             TextField::new('number'),
             DateField::new('start_date'),

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Software;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -20,6 +21,9 @@ class SoftwareCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            FormField::addTab('Identification')
+                ->setIcon('user')->addCssClass('optional')
+                ->setHelp('All information about the software'),
             IdField::new('id'),
             TextField::new('softwareName'),
             TextField::new('version'),
