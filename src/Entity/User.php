@@ -2,10 +2,8 @@
 
 namespace App\Entity;
 
-use App\Entity\Classroom;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
-use Symfony\Component\Mime\Message;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +14,6 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -123,9 +120,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'boolean')]
     private $isVerified = false;
-
-    // #[ORM\ManyToOne(inversedBy: 'admin')]
-    // private ?Equipment $equipment = null;
 
     #[ORM\OneToMany(targetEntity: Classroom::class, mappedBy: 'admin', orphanRemoval: true)]
     private Collection $classrooms;
@@ -450,6 +444,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // toString() allows to use the object as a string
     public function toString(): string
     {
-        return $this->getName();
+        return $this->name;
     }
 }
