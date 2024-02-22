@@ -15,5 +15,6 @@
         {{ form_row(registrationForm.agreeTerms, {'label_attr': {'class': 'form-check-label'}}) }}
 
         <button type="submit" class="btn">Register</button>
+        <a href="{{ path('app_login') }}">login</a>
     {{ form_end(registrationForm) }}
 {% endblock %}

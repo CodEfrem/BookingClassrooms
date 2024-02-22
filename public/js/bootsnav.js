@@ -530,6 +530,8 @@
                         $(".fa", this).addClass("fa-bars");
                     });
 
+
+                    
                     // Scroll
                     var scrollTop = $(window).scrollTop(),
                         $anchor = $(this).find('a'),
