@@ -1,43 +1,66 @@
 <div class="top-area">
-    <div class="header-area">
-        <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                        <i class="fa fa-bars"></i>
-                    </button>
-                    <a class="navbar-brand" href="/">
-                        <img src="images/logo.png" alt="Logo BookingClassrooms" style="width: 350px;">
-                    </a>
-                </div>
-                <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-                    <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                        {% if app.request.attributes.get('_route') == 'app_home' %}
-                        <li class="scroll">
-                            <a href="#service">Service</a>
-                        </li>
-                        {% endif %}
-                        <li class="scroll">
-                            <a href="#contact">Contact</a>    
-                        </li>
-                        {% if app.user %} 
-                            {# Affiche les liens uniquement si un utilisateur est connecté #}
-                            <li class="">
-                                <a href="{{ path('classrooms') }}">Classrooms</a>
-                            </li>
-                            <li class="">
-                                <a class="dropdown-item" href="{{ path('app_logout') }}">Logout</a>
-                            </li>
-                        {% endif %} 
-                    </ul>
-                    <!--/.nav -->
-                </div> 
-                <!-- /.navbar-collapse -->
-            </div>
-            <!--/.container-->
-        </nav>
-    </div>
-    <!--/.header-area-->
-    <div class="clearfix"></div>
+	<div class="header-area">
+		<nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+						<i class="fa fa-bars"></i>
+					</button>
+					<a class="navbar-brand" href="/">
+						<img src="images/logo.png" alt="Logo BookingClassrooms" style="width: 350px;">
+					</a>
+				</div>
+				<div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+					<ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+						{% if app.request.attributes.get('_route') == 'app_home' %}
+							<li class="scroll">
+								<a href="#service">Service</a>
+							</li>
+							<li class="scroll">
+								<a href="#contact">Contact</a>
+							</li>
+						{% endif %}
+
+						{% if app.user %}
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.name }}
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									<li>
+										<a href="{{ path('account') }}">My account</a>
+									</li>
+									{% if is_granted('ROLE_ADMIN') %}
+										<li>
+											<a href="{{ path('admin') }}">Admin dashboard</a>
+										</li>
+									{% endif %}
+									<li class="divider"></li>
+									<li>
+										<strong>
+											<a href="{{ path('app_logout') }}">Logout</a>
+										</strong>
+									</li>
+								</ul>
+							</li>
+						{% endif %}
+					</ul>
+					{% if app.user %}
+						<ul class="nav navbar-nav navbar-right">
+							<li>
+								<a href="{{ path('classrooms') }}">Classrooms</a>
+							</li>
+						</ul>
+					{% endif %}
+				</div>
+
+
+				<!-- /.navbar-collapse -->
+			</div>
+			<!--/.container-->
+		</nav>
+	</div>
+	<!--/.header-area-->
+	<div class="clearfix"></div>
 </div>
 <!-- /.top-area-->

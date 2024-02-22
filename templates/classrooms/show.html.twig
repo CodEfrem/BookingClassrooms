@@ -2,84 +2,74 @@
     <link rel="stylesheet" href="css/app.css">
     <link rel="stylesheet" href="css/style.css">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-        }
-
+     <style>
+        /* Override Bootstrap styles */
         .container {
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding:6rem;
         }
-
-        .header {
+        .btn-primary {
             background-color: #4E4FFA;
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 10px 10px 0 0;
+            border-color: #4E4FFA;
         }
-
+        .btn-primary:hover {
+            background-color: #0102fa;
+            border-color: #0102fa;
+        }
+        .header {
+            background-color: #ffffff;
+            color: #4E4FFA;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px;
+        }
         .header h1 {
             margin: 0;
             font-size: 24px;
         }
-
         .details {
             padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
         }
-
         .details p {
-            margin: 0 0 10px;
+            margin: 0;
+            font-size: 16px;
+          
         }
-
-        .image {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
+       
         .image img {
-            max-width: 100%;
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
         .bookings {
-            margin-top: 20px;
+            padding: 20px;
         }
-
         .booking {
-            background-color: #ffffff;
+            background-color: #feefff;
             padding: 10px;
             border-radius: 5px;
             margin-bottom: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
-       .buttons {
-    display: flex;
-    justify-content: space-between; /* Alignement horizontal avec un espace entre les éléments */
-    margin-top: 20px; /* Marge supérieure entre les boutons */
-}
-
-.btn {
-    padding: 10px 20px;
-    background-color: #0102fa;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-}
-
-.btn:hover {
-    background-color: #4E4FFA;
-}
-
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            text-decoration:none;
+        }
+        .btn {
+            color:#ffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #0102fa;
+           
+        }
+        .btn:hover {
+            background-color: #4E4FFA;
+            color: #ffffff;
+        }
     </style>
 {% endblock %}
 
