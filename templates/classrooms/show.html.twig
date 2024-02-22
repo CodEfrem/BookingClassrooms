@@ -1,0 +1,127 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            background-color: #4E4FFA;
+            color: #ffffff;
+            padding: 20px;
+            border-radius: 10px 10px 0 0;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .details {
+            padding: 20px;
+        }
+
+        .details p {
+            margin: 0 0 10px;
+        }
+
+        .image {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .bookings {
+            margin-top: 20px;
+        }
+
+        .booking {
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+       .buttons {
+    display: flex;
+    justify-content: space-between; /* Alignement horizontal avec un espace entre les éléments */
+    margin-top: 20px; /* Marge supérieure entre les boutons */
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #0102fa;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #4E4FFA;
+}
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="header">
+            <h1>{{ classroom.name }}</h1>
+        </div>
+        <br>
+
+        {% if classroom.image is not empty %}
+            <div class="image">
+                <img src="../images/salles.jpg" alt="Classroom Image">
+            </div>
+        {% endif %}
+
+        <div class="details">
+            <strong><p>Description:</strong> {{ classroom.description }}</p>
+            <strong><p>Address:</strong> {{ classroom.address }}, {{ classroom.city }}, {{ classroom.country }}, {{ classroom.zip }}</p>
+            <strong><p>Gauge:</strong> {{ classroom.gauge }} personne(s)</p>
+            <strong><p>Floor: </strong>{{ classroom.floor }} étages</p>
+            <strong><p>Parking:</strong> {{ classroom.parking ? 'Yes' : 'No' }}</p>
+            <strong><p>Price:</strong> {{ classroom.price }} €</p>
+            <strong><p>Status:</strong> {{ classroom.status ? 'Active' : 'Inactive' }}</p>
+        </div>
+
+        <div class="bookings">
+            <h2>Bookings</h2>
+            {% if classroom.bookings is not empty %}
+                {% for booking in classroom.bookings %}
+                    <div class="booking">
+                        <p>{{ booking.startTime|date('Y-m-d H:i') }} - {{ booking.endTime|date('Y-m-d H:i') }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucune réservation</p>
+            {% endif %}
+        </div>
+
+        <div class="buttons">
+            <a href="#" class="btn">Réserver</a>
+            <a href="{{ path('classrooms') }}" class="btn">Retour à la liste des salles de classe</a>
+        </div>
+    </div>
+{% endblock %}
