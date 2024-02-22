@@ -20,12 +20,7 @@
                         <li class="scroll">
                             <a href="#contact">Contact</a>    
                         </li>
-                        {% if not app.user %} 
-                            {# Affiche le lien de connexion uniquement si l'utilisateur n'est pas connecté #}
-                            <li class="">
-                                <a class="dropdown-item" href="{{ path('app_login') }}">Login</a>
-                            </li>
-                        {% else %}
+                        {% if app.user %} 
                             {# Affiche les liens uniquement si un utilisateur est connecté #}
                             <li class="">
                                 <a href="{{ path('classrooms') }}">Classrooms</a>
