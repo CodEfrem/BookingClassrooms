@@ -1,0 +1,223 @@
+/* Room Card */
+/* Nouveau style pour les cartes */
+.card {
+    border: none;
+    /* Supprimer la bordure */
+    border-radius: 10px;
+    /* Ajouter une bordure arrondie */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Ajouter une ombre */
+    transition: transform 0.3s;
+    /* Ajouter une transition d'animation */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    /* Animer la carte lorsqu'elle est survolée */
+}
+
+.card img {
+    border-top-left-radius: 10px;
+    /* Rendre les coins de l'image supérieure arrondis */
+    border-top-right-radius: 10px;
+}
+
+.card-body {
+    padding: 20px;
+    /* Ajouter de la marge intérieure */
+}
+
+.card-title {
+    font-size: 1.25rem;
+    /* Taille de la police pour le titre */
+    margin-bottom: 0.5rem;
+    /* Ajouter un espacement inférieur */
+}
+
+.card-text {
+    color: #979da2;
+    /* Couleur du texte du contenu */
+}
+
+.card a.btn {
+    background-color: #4E4FFA;
+    /* Couleur de fond du bouton */
+    border: none;
+    /* Supprimer la bordure du bouton */
+}
+
+.card a.btn:hover {
+    background-color: #0102fa;
+    color: white;
+}
+
+.classrooms {
+    margin-top: 14rem;
+}
+
+
+/* Hero */
+.welcome-hero {
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    z-index: 1;
+}
+
+.welcome-hero:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Styles for login form */
+.login-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    margin-top: 20rem;
+    margin-bottom: 20rem;
+}
+
+.login-form .form-group {
+    margin-bottom: 20px;
+}
+
+.login-form label {
+    font-weight: bold;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-form button {
+    padding: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4E4FFA;
+    color: #fff;
+}
+
+.login-form button:hover {
+    background-color:#0102fa;
+}
+
+
+/* Add this CSS to your stylesheets */
+
+#c-account{
+    margin: 10rem;
+}
+
+#dac {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.card {
+    border: none;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #fff;
+    background-color: #f2f2f2;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    background-color: #f2f2f2;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.list-inline-item {
+    font-size: 16px;
+    margin-right: 20px;
+}
+
+.btn-danger-soft {
+    background-color: #ffc2b4;
+    color: #ff6f61;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.btn-danger-soft:hover {
+    background-color: #ff6f61;
+    color: #fff;
+}
+
+.modal-content {
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+.modal-header {
+    border-bottom: none;
+}
+
+.modal-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.modal-body {
+    padding: 20px;
+}
+
+.modal-footer {
+    border-top: none;
+}
+
+.form-control {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #ff6f61;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #e94536;
+}

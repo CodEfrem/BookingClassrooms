@@ -1,0 +1,117 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="css/app.css">
+    <link rel="stylesheet" href="css/style.css">
+
+     <style>
+        /* Override Bootstrap styles */
+        .container {
+            padding:6rem;
+        }
+        .btn-primary {
+            background-color: #4E4FFA;
+            border-color: #4E4FFA;
+        }
+        .btn-primary:hover {
+            background-color: #0102fa;
+            border-color: #0102fa;
+        }
+        .header {
+            background-color: #ffffff;
+            color: #4E4FFA;
+            border-bottom: 1px solid #e0e0e0;
+            padding: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .details {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .details p {
+            margin: 0;
+            font-size: 16px;
+          
+        }
+       
+        .image img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .bookings {
+            padding: 20px;
+        }
+        .booking {
+            background-color: #feefff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            text-decoration:none;
+        }
+        .btn {
+            color:#ffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+            background-color: #0102fa;
+           
+        }
+        .btn:hover {
+            background-color: #4E4FFA;
+            color: #ffffff;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="header">
+            <h1>{{ classroom.name }}</h1>
+        </div>
+        <br>
+
+        {% if classroom.image is not empty %}
+            <div class="image">
+                <img src="../images/salles.jpg" alt="Classroom Image">
+            </div>
+        {% endif %}
+
+        <div class="details">
+            <strong><p>Description:</strong> {{ classroom.description }}</p>
+            <strong><p>Address:</strong> {{ classroom.address }}, {{ classroom.city }}, {{ classroom.country }}, {{ classroom.zip }}</p>
+            <strong><p>Gauge:</strong> {{ classroom.gauge }} personne(s)</p>
+            <strong><p>Floor: </strong>{{ classroom.floor }} étages</p>
+            <strong><p>Parking:</strong> {{ classroom.parking ? 'Yes' : 'No' }}</p>
+            <strong><p>Price:</strong> {{ classroom.price }} €</p>
+            <strong><p>Status:</strong> {{ classroom.status ? 'Active' : 'Inactive' }}</p>
+        </div>
+
+        <div class="bookings">
+            <h2>Bookings</h2>
+            {% if classroom.bookings is not empty %}
+                {% for booking in classroom.bookings %}
+                    <div class="booking">
+                        <p>{{ booking.startTime|date('Y-m-d H:i') }} - {{ booking.endTime|date('Y-m-d H:i') }}</p>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucune réservation</p>
+            {% endif %}
+        </div>
+
+        <div class="buttons">
+            <a href="#" class="btn">Réserver</a>
+            <a href="{{ path('classrooms') }}" class="btn">Retour à la liste des salles de classe</a>
+        </div>
+    </div>
+{% endblock %}

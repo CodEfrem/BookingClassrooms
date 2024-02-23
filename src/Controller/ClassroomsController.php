@@ -6,29 +6,41 @@ use App\Entity\Classroom;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Persistence\ManagerRegistry; 
+use Doctrine\Persistence\ManagerRegistry; // Importez ManagerRegistry
+use Doctrine\ORM\EntityManagerInterface;
 
 class ClassroomsController extends AbstractController
 {
     private $managerRegistry;
 
-    public function __construct(ManagerRegistry $managerRegistry)
-    {
-        $this->managerRegistry = $managerRegistry;
-    }
+    private $entityManager;
 
-    #[Route('/classrooms', name: 'app_classrooms')]
-    public function index(): Response
+    public function __construct(ManagerRegistry $managerRegistry, EntityManagerInterface $entityManager)
     {
+        $this->managerRegistry = $managerRegistry; // Affectez le managerRegistry
+        $this->entityManager = $entityManager;
+    }
     
-        $classrooms = $this->managerRegistry
+    #[Route('/classrooms', name: 'classrooms')]
+    public function classrooms(): Response
+    {
+        $classrooms = $this->entityManager
             ->getRepository(Classroom::class)
             ->findAll();
-        
-        return $this->render('classrooms/index.html.twig', [
+
+        return $this->render('classrooms/classrooms.html.twig', [
             'classrooms' => $classrooms,
         ]);
     }
+
+    #[Route('/classrooms/{id}', name: 'classroom_show')]
+    public function show(Classroom $classroom): Response
+    {
+        return $this->render('classrooms/show.html.twig', [
+            'classroom' => $classroom,
+        ]);
+    }
+
 
     
 }

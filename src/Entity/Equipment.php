@@ -5,9 +5,7 @@ namespace App\Entity;
 use App\Repository\EquipmentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-
 
 #[ORM\Entity(repositoryClass: EquipmentRepository::class)]
 class Equipment
@@ -20,13 +18,13 @@ class Equipment
     #[ORM\Column]
     private ?string $option = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: 'datetime')]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'equipments')]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $admin = null;
 
