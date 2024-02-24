@@ -35,13 +35,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\Regex(
-        pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
-        message: 'Your password must contain : at least 1 uppercase letter, 1 lowercase letter, 1 number, at least 1 special character, at least 8 characters'
-    )]
+    // #[Assert\Regex(
+    //     pattern: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/',
+    //     message: 'Your password must contain : at least 1 uppercase letter, 1 lowercase letter, 1 number, at least 1 special character @$!%*?&, at least 8 characters'
+    // )]
     private ?string $password = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     #[Assert\Length(
         min: 2,
         max: 50,
@@ -50,7 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $name = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     #[Assert\Length(
         min: 2,
         max: 100,
@@ -59,21 +59,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $corporate_name = null;
 
-    #[ORM\Column(length: 14)]
+    #[ORM\Column(length: 17, nullable: true)]
     #[Assert\Length(
-        exactly: 14,
+        exactly: 17,
         exactMessage: 'Your siret must be at {{limit}} characters long',
     )]
     private ?string $siret = null;
 
     #[ORM\Column(length: 15, nullable: true)]
     #[Assert\Length(
-        exactly: 15,
-        exactMessage: 'Your phone must be at {{limit}} characters long',
+        min: 10,
+        max: 15,
+        minMessage: 'Your address must be at least {{ limit }} characters long',
+        maxMessage: 'Your address cannot be longer than {{ limit }} characters',
     )]
     private ?string $phone = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     #[Assert\Length(
         min: 2,
         max: 255,
@@ -82,7 +84,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $address = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     #[Assert\Length(
         min: 2,
         max: 50,
@@ -91,7 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $city = null;
 
-    #[ORM\Column(length: 20)]
+    #[ORM\Column(length: 20, nullable: true)]
     #[Assert\Length(
         min: 5,
         max: 20,
@@ -100,7 +102,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     private ?string $zip = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     #[Assert\Length(
         min: 2,
         max: 50,
@@ -444,6 +446,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     // toString() allows to use the object as a string
     public function toString(): string
     {
-        return $this->name;
+        return $this->email;
     }
 }
