@@ -33,7 +33,7 @@ class SoftwareCrudController extends AbstractCrudController
             FormField::addTab('Identification')
                 ->setIcon('user')->addCssClass('optional')
                 ->setHelp('All information about the software'),
-            IdField::new('id'),
+            IdField::new('id')->hideOnForm(),
             TextField::new('softwareName'),
             TextField::new('version'),
             TextEditorField::new('description'),

@@ -2,10 +2,11 @@
 
 namespace App\Entity;
 
-use App\Repository\EquipmentRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EquipmentRepository;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: EquipmentRepository::class)]
 class Equipment
@@ -15,17 +16,17 @@ class Equipment
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column(length: 50)]
     private ?string $option = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column (type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $admin = null;
 
     #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]

@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\SoftwareRepository;
 
@@ -13,16 +14,16 @@ class Software
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: 'string', length: 255)]
+    #[ORM\Column(length: 255)]
     private ?string $softwareName = null;
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $version = null;
 
-    #[ORM\Column(type: 'text', nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(type: 'integer', nullable: true)]
+    #[ORM\Column(nullable: true)]
     private ?int $year = null;
 
     #[ORM\ManyToOne(inversedBy: 'softwares')]
@@ -39,7 +40,7 @@ class Software
         return $this->softwareName;
     }
 
-    public function setSoftwareName(string $softwareName): self
+    public function setSoftwareName(string $softwareName): static
     {
         $this->softwareName = $softwareName;
 
@@ -51,7 +52,7 @@ class Software
         return $this->version;
     }
 
-    public function setVersion(?string $version): self
+    public function setVersion(?string $version): static
     {
         $this->version = $version;
 
@@ -63,7 +64,7 @@ class Software
         return $this->description;
     }
 
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description): static
     {
         $this->description = $description;
 
@@ -75,7 +76,7 @@ class Software
         return $this->year;
     }
 
-    public function setYear(?int $year): self
+    public function setYear(?int $year): static
     {
         $this->year = $year;
 

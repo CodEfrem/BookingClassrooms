@@ -36,7 +36,7 @@ class UserCrudController extends AbstractCrudController
             FormField::addTab('Identification')
                 ->setIcon('user')->addCssClass('optional')
                 ->setHelp('All information about the client'),
-            IdField::new('id')->hideOnIndex(),
+            IdField::new('id')->hideOnForm(),
             TextField::new('name'),
             TextField::new('corporate_name'),
             EmailField::new('email'),

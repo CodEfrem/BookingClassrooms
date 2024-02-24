@@ -28,17 +28,17 @@ This entity represents a user of the platform. The user can be a client or a adm
 
 | Property       | Type      | Description          | Relationship |
 |----------------|-----------|----------------------|--------------|
-| name           | string    | 50 NOT NULL          |              |
-| corporate_name | string    | 100 NOT NULL         |              | 
-| siret          | string    | 14 NOT NULL          |              |
+| name           | string    | 50                   |              |
+| corporate_name | string    | 100                  |              | 
+| siret          | string    | 14                   |              |
 | email          | string    | 100 NOT NULL, UNIQUE |              | 
 | password       | string    | 255 NOT NULL         |              | 
 | role           | string    | 50 NOT NULL          |              |
 | phone          | string    | 15                   |              |
-| address        | string    | 255 NOT NULL         |              |
-| city           | string    | 50 NOT NULL          |              |
-| zip            | string    | 20 NOT NULL          |              |
-| country        | string    | 50 NOT NULL          |              |
+| address        | string    | 255                  |              |
+| city           | string    | 50                   |              |
+| zip            | string    | 20                   |              |
+| country        | string    | 50                   |              |
 | consent        | bool      |                      |              |
 | created_at     | datetime  | NOT NULL             |              |
 | updated_at     | datetime  |                      |              |
@@ -59,9 +59,9 @@ This entity represents a classroom for rent.
 | zip         | string     | 20 NOT NULL          |              |
 | country     | string     | 50 NOT NULL          |              |
 | gauge       | integer    | NOT NULL             |              |
-| floor       | string     | NOT NULL             |              |
+| floor        | string     | NOT NULL             |              |
 | parking     | bool       |                      |              |
-| price       | float      | NOT NULL             |              | 
+| price       | integer    | NOT NULL             |              | 
 | status      | bool       | NOT NULL             |              |
 | image       | string     | 255                  |              |
 | admin       | ManyToOne  | NOT NULL, OrphanTrue | User         |
@@ -80,7 +80,7 @@ This entity represents a booking made by client for a classroom.
 | number     | string    | 50 NOT NULL          |              | 
 | start_date | datetime  | NOT NULL             |              | 
 | end_date   | datetime  | NOT NULL             |              | 
-| amount     | float     | NOT NULL             |              |
+| amount     | integer   | NOT NULL             |              |
 | status     | bool      | NOT NULL             |              | 
 | client     | ManyToOne | NOT NULL, OrphanTrue | User         | 
 | classroom  | ManyToOne | NOT NULL, OrphanTrue | Classroom    |
@@ -95,7 +95,7 @@ This entity represents the equipment for a classroom.
 
 | Property   | Type       | Description          | Relationship |
 |------------|------------|----------------------|--------------|
-| option     | string     | NOT NULL             |              | 
+| option     | string     | 50 NOT NULL          |              | 
 | admin      | ManyToOne  | NOT NULL, OrphanTrue | User         |
 | classrooms | ManyToMany | NOT NULL             | Classroom    | 
 | created_at | datetime   | NOT NULL             |              |
@@ -123,7 +123,7 @@ This entity represents the customer who will use the classroom.
 
 | Property   | Type      | Description | Relationship |
 |------------|-----------|-------------|--------------|
-| effective  | int       | NOT NULL    |              | 
+| effective  | integer   | NOT NULL    |              | 
 | booking    | ManyToOne |             | Booking      | 
 | created_at | datetime  | NOT NULL    |              | 
 
