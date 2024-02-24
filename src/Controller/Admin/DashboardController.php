@@ -42,13 +42,12 @@ class DashboardController extends AbstractDashboardController
         return Dashboard::new()
         ->setTitle('<img src="/images/logoBC.jpeg" width="50">')
         ->setFaviconPath('/images/logoBC.jpeg')
-        ->renderContentMaximized()
-        ->renderSidebarMinimized();
+        ->renderContentMaximized();
     }
 
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Classrooms', 'fa fa-graduation-cap', Classroom::class);
         yield MenuItem::linkToCrud('Bookings', 'fa fa-tags', Booking::class);
         yield MenuItem::linkToCrud('Clients', 'fa fa-users', User::class);

@@ -54,10 +54,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Length(
         min: 2,
         max: 100,
-        minMessage: 'Your corporate_name must be at least {{ limit }} characters long',
-        maxMessage: 'Your corporate_name cannot be longer than {{ limit }} characters',
+        minMessage: 'Your corporateName must be at least {{ limit }} characters long',
+        maxMessage: 'Your corporateName cannot be longer than {{ limit }} characters',
     )]
-    private ?string $corporate_name = null;
+    private ?string $corporateName = null;
 
     #[ORM\Column(length: 17, nullable: true)]
     #[Assert\Length(
@@ -223,12 +223,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getCorporateName(): ?string
     {
-        return $this->corporate_name;
+        return $this->corporateName;
     }
 
-    public function setCorporateName(string $corporate_name): static
+    public function setCorporateName(string $corporateName): static
     {
-        $this->corporate_name = $corporate_name;
+        $this->corporateName = $corporateName;
 
         return $this;
     }

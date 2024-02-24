@@ -8,7 +8,7 @@ class ClientService
     public function updateProfile($form, $user, $em)
     {
         $user->setName($form->get('name')->getData());
-        $user->setCorporateName($form->get('corporate_name')->getData());
+        $user->setCorporateName($form->get('corporateName')->getData());
         $user->setSiret($form->get('siret')->getData());
         $user->setPhone($form->get('phone')->getData());
         $user->setAddress($form->get('address')->getData());

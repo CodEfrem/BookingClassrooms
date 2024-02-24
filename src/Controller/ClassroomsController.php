@@ -24,6 +24,10 @@ class ClassroomsController extends AbstractController
     #[Route('/classrooms', name: 'classrooms')]
     public function classrooms(): Response
     {
+            if (!$this->getUser()) {
+                return $this->redirectToRoute('app_login');
+            }
+
         $classrooms = $this->entityManager
             ->getRepository(Classroom::class)
             ->findAll();
@@ -40,7 +44,5 @@ class ClassroomsController extends AbstractController
             'classroom' => $classroom,
         ]);
     }
-
-
     
 }

@@ -43,7 +43,7 @@ class BookingCrudController extends AbstractCrudController
                 ->setCurrency('EUR'),
             BooleanField::new('status'),
             DateField::new('created_at'),
-            AssociationField::new('client'),
+            AssociationField::new('client')->hideOnForm(),
             AssociationField::new('classroom'),
             AssociationField::new('customers'),
         ];
