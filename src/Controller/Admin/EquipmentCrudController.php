@@ -34,9 +34,7 @@ class EquipmentCrudController extends AbstractCrudController
                 ->setHelp('All information about the equipment'),
             IdField::new('id')->hideOnForm(),
             TextField::new('option'),
-            DateField::new('created_at'),
-            DateField::new('updated_at'),
-            
+            DateField::new('created_at'),            
         ];
     }
 }

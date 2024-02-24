@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -46,6 +47,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('city')->hideOnIndex(),
             TextField::new('zip')->hideOnIndex(),
             TextField::new('country')->hideOnIndex(),
+            DateField::new('created_at')->hideOnIndex(),
             BooleanField::new('consent')->hideOnIndex(),
         ];
     }
