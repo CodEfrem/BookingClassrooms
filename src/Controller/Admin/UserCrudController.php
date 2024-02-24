@@ -38,7 +38,7 @@ class UserCrudController extends AbstractCrudController
                 ->setHelp('All information about the client'),
             IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            TextField::new('corporate_name'),
+            TextField::new('corporateName'),
             EmailField::new('email'),
             TextField::new('siret'),
             TelephoneField::new('phone')->hideOnIndex(),

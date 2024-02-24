@@ -17,7 +17,7 @@ class ClientType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Name',
             ])
-            ->add('corporate_name', TextType::class, [
+            ->add('corporateName', TextType::class, [
                 'label' => 'Corporate name',
             ])
             ->add('siret', TextType::class, [

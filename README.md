@@ -29,7 +29,7 @@ This entity represents a user of the platform. The user can be a client or a adm
 | Property       | Type      | Description          | Relationship |
 |----------------|-----------|----------------------|--------------|
 | name           | string    | 50                   |              |
-| corporate_name | string    | 100                  |              | 
+| corporateName | string    | 100                  |              | 
 | siret          | string    | 14                   |              |
 | email          | string    | 100 NOT NULL, UNIQUE |              | 
 | password       | string    | 255 NOT NULL         |              | 
