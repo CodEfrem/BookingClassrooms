@@ -15,59 +15,35 @@
 
 									<div class="col-md-4">
     									<label for="software" class="form-label">Logiciels :</label>
-    									<select id="software" name="software[]" multiple class="form-select">
-        									{% for software in software %}
-            									<option value="{{ software.id }}">{{ software.softwareName }}</option>
+    										<select id="software" name="software[]" multiple class="form-select">
+        										{% for software in software %}
+            										<option value="{{ software.id }}">{{ software.softwareName }}</option>
+        										{% endfor %}
+    										</select>
+									</div>
+
+
+
+								<div class="col-md-4">
+    								<label for="prices" class="form-label">Prix :</label>
+    									<select id="prices" name="prices[]" multiple class="form-select">
+        									{% for booking in bookings %}
+            									<option value="{{ booking.amount }}">{{ booking.amount }} €</option>
         									{% endfor %}
     									</select>
-									</div>
-
-
-
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										<h2>select price</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
-											  	<option value="default">price</option>
-											</select>
-										</div>
-									</div>
-
 								</div>
 
 
-								<div class="col-md-offset-1 col-md-2 col-sm-12">
-									<div class="single-model-search">
-										
-                                        <h2>Option</h2>
-										<div class="model-select-icon">
-											<select class="form-control">
 
-											  	<div>
-                                                    <input class="form-check-input" type="checkbox" id="daylight" name="daylight">
-                                                    <label class="form-check-label" for="daylight">Lumière naturelle</label>
-                                                </div>
-
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" id="artificiallight" name="artificiallight">
-                                                    <label class="form-check-label" for="artificiallight">Lumière artificielle</label>
-                                                </div>
-
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" id="videoprojector" name="videoprojector">
-                                                    <label class="form-check-label" for="videoprojector">Vidéoprojecteur</label>
-                                                </div>
-
-                                                <div>
-                                                    <input class="form-check-input" type="checkbox" id="pmr" name="pmr">
-                                                    <label class="form-check-label" for="pmr">Accès PMR</label>
-                                                </div>
-
-											</select>
-										</div>
-									</div>
+								<div class="col-md-4">
+    								<label for="equipments" class="form-label">Équipements :</label>
+    									<select id="equipments" name="equipments[]" multiple class="form-select">
+        									{% for equipment in equipments %}
+            									<option value="{{ equipment.id }}">{{ equipment.option }}</option>
+        									{% endfor %}
+    									</select>
 								</div>
+
 								<div class="col-md-2 col-sm-12">
 									<div class="single-model-search text-center">
 										<button class="welcome-btn model-search-btn" onclick="window.location.href='#'">
