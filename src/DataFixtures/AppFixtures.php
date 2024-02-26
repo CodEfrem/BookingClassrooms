@@ -78,8 +78,8 @@ class AppFixtures extends Fixture
             array_push($equipments, $equipment);
         }
 
-        // Set classrooms
-        for ($j = 0; $j < 5; $j++) {
+        // Set customer
+        for ($j = 0; $j < 50; $j++) {
             $customer = new Customer();
             $customer->setEffective($faker->numberBetween(10, 30))
                 ->setCreatedAt($faker->dateTimeThisYear);
@@ -87,7 +87,7 @@ class AppFixtures extends Fixture
         }
 
         // Set classrooms
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $classroom = new Classroom();
             $classroom->setAdmin($admin)
                 ->setName('Classroom ' . $i)
@@ -99,7 +99,7 @@ class AppFixtures extends Fixture
                 ->setGauge($faker->randomNumber(2))
                 ->setFloor($faker->numberBetween(0, 10))
                 ->setParking($faker->boolean)
-                ->setPrice($faker->numberBetween(300, 5000))
+                ->setPrice($faker->numberBetween(3000, 50000))
                 ->setStatus($faker->boolean)
                 ->setImage(rand(0,1) ? 'default.jpg' : 'default-1.jpg')
                 ->addEquipment($faker->randomElement($equipments));
@@ -113,7 +113,7 @@ class AppFixtures extends Fixture
                 ->setClassroom($classroom)
                 ->setStartDate($faker->dateTimeThisMonth)
                 ->setEndDate($faker->dateTimeThisYear('+5 months'))
-                ->setAmount($faker->randomFloat(2, 300, 50000))
+                ->setAmount($faker->randomFloat(2, 30000, 5000000))
                 ->setStatus($faker->boolean)
                 ->addCustomer($customer)
                 ->setCreatedAt($faker->dateTimeThisYear)

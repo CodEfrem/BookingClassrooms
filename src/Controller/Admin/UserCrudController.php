@@ -7,6 +7,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -36,9 +37,9 @@ class UserCrudController extends AbstractCrudController
             FormField::addTab('Identification')
                 ->setIcon('user')->addCssClass('optional')
                 ->setHelp('All information about the client'),
-            IdField::new('id')->hideOnIndex(),
+            IdField::new('id')->hideOnForm(),
             TextField::new('name'),
-            TextField::new('corporate_name'),
+            TextField::new('corporateName'),
             EmailField::new('email'),
             TextField::new('siret'),
             TelephoneField::new('phone')->hideOnIndex(),
@@ -46,6 +47,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('city')->hideOnIndex(),
             TextField::new('zip')->hideOnIndex(),
             TextField::new('country')->hideOnIndex(),
+            DateField::new('created_at')->hideOnIndex(),
             BooleanField::new('consent')->hideOnIndex(),
         ];
     }

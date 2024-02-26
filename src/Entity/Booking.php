@@ -29,7 +29,7 @@ class Booking
     private ?\DateTimeInterface $end_date = null;
 
     #[ORM\Column]
-    private ?float $amount = null;
+    private ?int $amount = null;
 
     #[ORM\Column]
     private ?bool $status = null;
@@ -37,7 +37,7 @@ class Booking
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: false)]
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
@@ -134,12 +134,12 @@ class Booking
         return $this;
     }
 
-    public function getAmount(): ?float
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
 
-    public function setAmount(float $amount): static
+    public function setAmount(int $amount): static
     {
         $this->amount = $amount;
 

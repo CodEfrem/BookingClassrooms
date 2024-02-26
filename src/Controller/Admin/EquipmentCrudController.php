@@ -32,10 +32,9 @@ class EquipmentCrudController extends AbstractCrudController
             FormField::addTab('Identification')
                 ->setIcon('user')->addCssClass('optional')
                 ->setHelp('All information about the equipment'),
-            IdField::new('id')->hideOnIndex(),
+            IdField::new('id')->hideOnForm(),
             TextField::new('option'),
-            DateField::new('created_at'),
-            
+            DateField::new('created_at'),            
         ];
     }
 }

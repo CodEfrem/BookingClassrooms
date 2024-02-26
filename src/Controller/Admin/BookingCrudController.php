@@ -35,7 +35,7 @@ class BookingCrudController extends AbstractCrudController
             FormField::addTab('Identification')
                 ->setIcon('home')->addCssClass('optional')
                 ->setHelp('All information about the booking'),
-            IdField::new('id')->hideOnIndex(),
+            IdField::new('id')->hideOnForm(),
             TextField::new('number'),
             DateField::new('start_date'),
             DateField::new('end_date'),
@@ -43,7 +43,7 @@ class BookingCrudController extends AbstractCrudController
                 ->setCurrency('EUR'),
             BooleanField::new('status'),
             DateField::new('created_at'),
-            AssociationField::new('client'),
+            AssociationField::new('client')->hideOnForm(),
             AssociationField::new('classroom'),
             AssociationField::new('customers'),
         ];

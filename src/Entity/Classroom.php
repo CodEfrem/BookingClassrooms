@@ -63,13 +63,13 @@ class Classroom
     )]
     private ?string $country = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column]
     private ?int $gauge = null;
 
     #[ORM\Column(length: 255)]
     private ?string $floor = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?bool $parking = null;
 
     #[ORM\Column(length: 255)]
@@ -79,9 +79,9 @@ class Classroom
     #[Assert\NotBlank(
         message: 'You should enter a price.'
     )]
-    private ?string $price = null;
+    private ?int $price = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?bool $status = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -217,12 +217,12 @@ class Classroom
         return $this;
     }
 
-    public function getPrice(): ?string
+    public function getPrice(): ?int
     {
         return $this->price;
     }
 
-    public function setPrice(string $price): static
+    public function setPrice(int $price): static
     {
         $this->price = $price;
 
