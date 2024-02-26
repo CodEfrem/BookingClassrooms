@@ -78,7 +78,7 @@ class AppFixtures extends Fixture
             array_push($equipments, $equipment);
         }
 
-        // Set classrooms
+        // Set customer
         for ($j = 0; $j < 50; $j++) {
             $customer = new Customer();
             $customer->setEffective($faker->numberBetween(10, 30))
@@ -87,7 +87,7 @@ class AppFixtures extends Fixture
         }
 
         // Set classrooms
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $classroom = new Classroom();
             $classroom->setAdmin($admin)
                 ->setName('Classroom ' . $i)
@@ -99,7 +99,7 @@ class AppFixtures extends Fixture
                 ->setGauge($faker->randomNumber(2))
                 ->setFloor($faker->numberBetween(0, 10))
                 ->setParking($faker->boolean)
-                ->setPrice($faker->numberBetween(30000, 500000))
+                ->setPrice($faker->numberBetween(3000, 50000))
                 ->setStatus($faker->boolean)
                 ->setImage(rand(0,1) ? 'default.jpg' : 'default-1.jpg')
                 ->addEquipment($faker->randomElement($equipments));
