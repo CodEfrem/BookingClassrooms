@@ -99,7 +99,7 @@ class AppFixtures extends Fixture
                 ->setGauge($faker->randomNumber(2))
                 ->setFloor($faker->numberBetween(0, 10))
                 ->setParking($faker->boolean)
-                ->setPrice($faker->numberBetween(30000, 500000))
+                ->setPrice($faker->numberBetween(3000, 50000))
                 ->setStatus($faker->boolean)
                 ->setImage(rand(0,1) ? 'default.jpg' : 'default-1.jpg')
                 ->addEquipment($faker->randomElement($equipments));
