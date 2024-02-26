@@ -78,7 +78,7 @@ class AppFixtures extends Fixture
             array_push($equipments, $equipment);
         }
 
-        // Set classrooms
+        // Set customer
         for ($j = 0; $j < 50; $j++) {
             $customer = new Customer();
             $customer->setEffective($faker->numberBetween(10, 30))
@@ -87,7 +87,7 @@ class AppFixtures extends Fixture
         }
 
         // Set classrooms
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $classroom = new Classroom();
             $classroom->setAdmin($admin)
                 ->setName('Classroom ' . $i)
