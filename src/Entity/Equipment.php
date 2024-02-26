@@ -26,7 +26,6 @@ class Equipment
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
-    #[ORM\JoinColumn(nullable: true)]
     private ?User $admin = null;
 
     #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]

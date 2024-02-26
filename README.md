@@ -29,7 +29,7 @@ This entity represents a user of the platform. The user can be a client or a adm
 | Property       | Type      | Description          | Relationship |
 |----------------|-----------|----------------------|--------------|
 | name           | string    | 50                   |              |
-| corporateName | string    | 100                  |              | 
+| corporateName  | string    | 100                  |              | 
 | siret          | string    | 14                   |              |
 | email          | string    | 100 NOT NULL, UNIQUE |              | 
 | password       | string    | 255 NOT NULL         |              | 
@@ -40,7 +40,7 @@ This entity represents a user of the platform. The user can be a client or a adm
 | zip            | string    | 20                   |              |
 | country        | string    | 50                   |              |
 | consent        | bool      |                      |              |
-| created_at     | datetime  | NOT NULL             |              |
+| created_at     | datetime  |                      |              |
 | updated_at     | datetime  |                      |              |
 | 
 
@@ -60,14 +60,12 @@ This entity represents a classroom for rent.
 | country     | string     | 50 NOT NULL          |              |
 | gauge       | integer    | NOT NULL             |              |
 | floor        | string     | NOT NULL             |              |
-| parking     | bool       |                      |              |
+| parking     | bool       | NOT NULL             |              |
 | price       | integer    | NOT NULL             |              | 
 | status      | bool       | NOT NULL             |              |
 | image       | string     | 255                  |              |
 | admin       | ManyToOne  | NOT NULL, OrphanTrue | User         |
 | equipments  | ManyToMany | NOT NULL,            | Equipment    |
-| created_at  | datetime   | NOT NULL             |              |
-| updated_at  | datetime   |                      |              |
 
 ---
 

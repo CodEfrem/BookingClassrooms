@@ -69,7 +69,7 @@ class Classroom
     #[ORM\Column(length: 255)]
     private ?string $floor = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?bool $parking = null;
 
     #[ORM\Column(length: 255)]
@@ -81,14 +81,14 @@ class Classroom
     )]
     private ?int $price = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column]
     private ?bool $status = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $image = 'default.png';
 
     #[ORM\ManyToOne(inversedBy: 'classrooms')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $admin = null;
 
     #[ORM\ManyToMany(targetEntity: Equipment::class, inversedBy: 'classrooms')]
