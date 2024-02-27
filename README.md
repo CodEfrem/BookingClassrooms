@@ -6,17 +6,18 @@
 
 This project is a platform BtoB for booking classrooms.
 
-The technologies used are:
+#### The technologies used are :
 
 Symfony 7
 Bootstrap 5
 Twig
 SQLite
 
-The packages used are : 
+#### The packages used are : 
 
 Dashboard Easyadmin
 Fixtures FakerPHP
+KnpPaginator
 
 
 ## Entities
@@ -79,7 +80,7 @@ This entity represents a booking made by client for a classroom.
 | start_date | datetime  | NOT NULL             |              | 
 | end_date   | datetime  | NOT NULL             |              | 
 | amount     | integer   | NOT NULL             |              |
-| status     | bool      | NOT NULL             |              | 
+| status     | bool      |                      |              | 
 | client     | ManyToOne | NOT NULL, OrphanTrue | User         | 
 | classroom  | ManyToOne | NOT NULL, OrphanTrue | Classroom    |
 | created_at | datetime  | NOT NULL             |              | 
@@ -115,15 +116,6 @@ This entity represents the software for a classroom.
 
 ---
 
-### Customer
-
-This entity represents the customer who will use the classroom.
-
-| Property   | Type      | Description | Relationship |
-|------------|-----------|-------------|--------------|
-| effective  | integer   | NOT NULL    |              | 
-| booking    | ManyToOne |             | Booking      | 
-| created_at | datetime  | NOT NULL    |              | 
 
 ## Pages architecture
 
