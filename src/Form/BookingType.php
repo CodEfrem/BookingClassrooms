@@ -17,24 +17,21 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType; // Utilisez ChoiceType pour le choix
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
 
 class BookingType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-
             ->add('start_date', DateType::class, [
                 'label' => 'Date de début de la réservation',
                 'widget' => 'single_text',
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['min' => date('d-m-Y')],
             ])
             ->add('end_date', DateType::class, [
                 'label' => 'Date de fin de la réservation',
                 'widget' => 'single_text',
-                'attr' => ['class' => 'form-control'],
+                'attr' => ['min' => date('d-m-Y')],
             ])
             ->add('customers', IntegerType::class, [
                 'label' => 'Nombre de clients',
@@ -45,10 +42,7 @@ class BookingType extends AbstractType
                 'label' => 'Salle n° ',
                 'disabled' => false, 
             ])
-            ->add('search', SubmitType::class, [
-                'label' => 'Rechercher',
-                'attr' => ['class' => 'btn btn-primary'],
-            ]);
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -58,4 +52,3 @@ class BookingType extends AbstractType
         ]);
     }
 }
-

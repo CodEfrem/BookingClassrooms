@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Entity\User;
 use App\Entity\Booking;
 use App\Entity\Classroom;
@@ -19,26 +18,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class BookingsController extends AbstractController
 {
     #[Route('/bookings', name: 'app_bookings')]
-
-    public function index(Request $request, BookingRepository $bookingRepository): Response
+    public function index(BookingRepository $bookingRepository): Response
     {
-        
+
         if (!$this->getUser()) {
             return $this->redirectToRoute('app_login');
         }
-  
-        $startDateString = $request->query->get('startDate');
-        $endDateString = $request->query->get('endDate');
-
+        // Récupérer toutes les réservations effectuées par l'utilisateur actuel
+        $user = $this->getUser();
+        $bookings = $bookingRepository->findBy(['client' => $user]);
         
-        $startDate = DateTime::createFromFormat('Y-m-d', $startDateString);
-        $endDate = DateTime::createFromFormat('Y-m-d', $endDateString);
-
-        
-        $bookings = $bookingRepository->findBookingsByDates($startDate, $endDate);
 
         return $this->render('bookings/index.html.twig', [
-            'controller_name' => 'BookingsController',
             'bookings' => $bookings,
         ]);
     }
