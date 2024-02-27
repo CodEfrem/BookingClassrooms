@@ -5,22 +5,26 @@
 							<div class="row">
 
 								<div class="col-md-offset-1 col-md-2 col-sm-12">
+    								<div class="single-model-search">
+        								<h2>Choisissez les dates</h2>
+        									<div class="model-select-icon">
+            									{{ form_start(form) }}
+            									{{ form_row(form.startDate) }}
+            									{{ form_row(form.endDate) }}
+            									{{ form_end(form) }}
+        									</div>
+    								</div>
+								</div>								
 
-									<div class="single-model-search">
-										<h2>select year</h2>
-										<div class="model-select-icon">
-											<input type="date" id="date" name="date" class="form-control">
-										</div>
-									</div>
+								<div class="col-md-4">
+    								<label for="software" class="form-label">Logiciels :</label>
+    									<select id="software" name="software[]" multiple class="form-select">
+        									{% for software in software %}
+            									<option value="{{ software.id }}">{{ software.softwareName }}</option>
+        									{% endfor %}
+    									</select>
+								</div>
 
-									<div class="col-md-4">
-    									<label for="software" class="form-label">Logiciels :</label>
-    										<select id="software" name="software[]" multiple class="form-select">
-        										{% for software in software %}
-            										<option value="{{ software.id }}">{{ software.softwareName }}</option>
-        										{% endfor %}
-    										</select>
-									</div>
 
 
 
