@@ -78,13 +78,6 @@ class AppFixtures extends Fixture
             array_push($equipments, $equipment);
         }
 
-        // Set customer
-        for ($j = 0; $j < 50; $j++) {
-            $customer = new Customer();
-            $customer->setEffective($faker->numberBetween(10, 30))
-                ->setCreatedAt($faker->dateTimeThisYear);
-            $manager->persist($customer);
-        }
 
         // Set classrooms
         for ($i = 0; $i < 100; $i++) {
@@ -115,7 +108,7 @@ class AppFixtures extends Fixture
                 ->setEndDate($faker->dateTimeThisYear('+5 months'))
                 ->setAmount($faker->randomFloat(2, 30000, 5000000))
                 ->setStatus($faker->boolean)
-                ->addCustomer($customer)
+                ->setCustomers($$faker->numberBetween(5, 50))
                 ->setCreatedAt($faker->dateTimeThisYear)
                 ->setUpdatedAt($faker->dateTimeThisYear);
             $manager->persist($booking);
