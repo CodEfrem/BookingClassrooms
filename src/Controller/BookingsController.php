@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Booking;
+use App\Entity\Classroom;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,7 +48,14 @@ public function requestBooking(Request $request, EntityManagerInterface $entityM
     if (!$this->getUser()) {
         return $this->redirectToRoute('app_login');
     }
+
+    $user = new User();
+
     $booking = new Booking();
+    $booking->setNumber(uniqid())
+    ->setCreatedAt(new \DateTime('now'))
+    ->setUser($user);
+    
     $form = $this->createForm(BookingType::class, $booking);
     $form->handleRequest($request);
 
