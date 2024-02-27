@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container py-5" id="c-account">
+
         <div id"">
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm">
@@ -13,36 +14,42 @@
                         </div>
                         <h2 class="h5 mb-2">{{ app.user.name }}</h2>
                         <p class="text-muted mb-4">{{ app.user.email }}</p>
-                        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#updateModal">
+                        <button class="btn btn-outline-danger">
+                        <a href="{{ path('complete_profile') }}"</a>
                             <i class="bi bi-pencil-fill pe-1"></i>
                             Update Profile
                         </button>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
                         <h2 class="h5 mb-4">Account Information</h2>
                         <ul class="list-unstyled mb-0">
                             <li class="mb-3">
-                                <i class="bi bi-briefcase me-1"></i>
+                                <i class="bi bi-briefcase me-1">siret: </i>
                                 {{ app.user.siret }}
                             </li>
                             <li class="mb-3">
-                                <i class="bi bi-geo-alt me-1"></i>
+                                <i class="bi bi-geo-alt me-1">phone: </i>
                                 {{ app.user.phone }}
                             </li>
                             <li class="mb-3">
-                                <i class="bi bi-geo-alt me-1"></i>
+                                <i class="bi bi-geo-alt me-1">address: </i>
                                 {{ app.user.address }}
                             </li>
                             <li class="mb-3">
-                                <i class="bi bi-geo-alt me-1"></i>
-                                {{ app.user.city }}, {{ app.user.zip }}
+                                <i class="bi bi-geo-alt me-1">siret: </i>
+                                {{ app.user.city }}
                             </li>
                             <li class="mb-3">
-                                <i class="bi bi-geo-alt me-1"></i>
+                                <i class="bi bi-geo-alt me-1">zip: </i>
+                                {{ app.user.zip }}
+                            </li>
+                            <li class="mb-3">
+                                <i class="bi bi-geo-alt me-1">country: </i>
                                 {{ app.user.country }}
                             </li>
                         </ul>
@@ -51,32 +58,58 @@
             </div>
         </div>
     </div>
+            <div class="row">
+					{# Booking #}
+					<div class="mb-4">
+						<div class="card">
+							<div class="card-header d-sm-flex justify-content-between align-items-center border-0">
+								<h5 class="card-title">
+									Your bookings
+									<span class="badge bg-danger bg-opacity-10 text-danger">
+										{{ app.user.bookings|length }}
+									</span>
+								</h5>
+								<a class="btn btn-primary-soft btn-sm" href={{ path('app_bookings') }}>
+									See more
+								</a>
+							</div>
+							<div class="card-body position-relative pt-3">
+								<div class="row g-3">
+									{% for booking in app.user.bookings %}
+										<div class="col-md-4 col-sm-12">
+											<div class="card shadow-none text-center h-100">
+												<div class="card-body p-2 pb-0">
+													{# <p class="card-title border fw-bold rounded-pill mb-1 mt-1">
+														{{ booking.classroom.name|slice(0, 15) }}...
+													</p> #}
+													<table class="table">
+														<tbody>
+															<tr>
+																<th scope="row">Start at</th>
+																<td>{{ booking.startDateString }}</td>
+															</tr>
+															<tr>
+																<th scope="row">End at</th>
+																<td>{{ booking.endDateString }}</td>
+															</tr>
+														</tbody>
+													</table>
+												</div>
+												<div class="card-footer p-2 border-0">
+													<a href={{ path('app_bookings', { booking: booking.id }) }} class="btn btn-sm btn-custom rounded-pill" data-bs-toggle="tooltip" data-bs-placement="top">
+														<i class="bi bi-eye"></i>
+														Check your booking
+													</a>
+												</div>
+											</div>
+										</div>
+									{% endfor %}
 
-    <!-- Update Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="updateModalLabel">Update your information</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+								</div>
+							</div>
+							<!-- Card body END -->
+						</div>
+					</div>
                 </div>
-                <div class="modal-body">
-                    {{ form_start(form) }}
-                        {{ form_row(form.name) }}
-                        {{ form_row(form.corporateName) }}
-                        {{ form_row(form.siret) }}
-                        {{ form_row(form.phone) }}
-                        {{ form_row(form.address) }}
-                        {{ form_row(form.city) }}
-                        {{ form_row(form.zip) }}
-                        {{ form_row(form.country) }}
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    {{ form_end(form) }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
+
 {% endblock %}

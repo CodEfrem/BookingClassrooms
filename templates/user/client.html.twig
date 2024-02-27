@@ -17,7 +17,7 @@
 			<img src="{{asset('/images/icon.svg')}}" alt="BookingClassroom logo" width="200">
 			<h1 class="text-center my-4">Complete your profile</h1>
 			<p>
-				Just a few more steps to complete your profile and start using BookingClassroom.
+				Just a few more steps to complete your profile.
 			</p>
 			{{ form_start(form, {
 				'attr': {
@@ -52,6 +52,15 @@
 							'value': app.user.siret
 						}) }}
 				<label for="floatingInput">Corporate siret</label>
+			</div>
+			<div class="form-floating mb-2">
+				{{ form_widget(form.phone, {
+							attr: {
+								class: 'form-control',
+							},
+							'value': app.user.phone
+						}) }}
+				<label for="floatingInput">Corporate phone</label>
 			</div>
 			<div class="form-floating mb-2">
 				{{ form_widget(form.address, {

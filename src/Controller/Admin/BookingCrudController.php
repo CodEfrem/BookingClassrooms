@@ -45,7 +45,6 @@ class BookingCrudController extends AbstractCrudController
             DateField::new('created_at'),
             AssociationField::new('client')->hideOnForm(),
             AssociationField::new('classroom'),
-            AssociationField::new('customers'),
         ];
     }
 }

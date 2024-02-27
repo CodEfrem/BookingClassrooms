@@ -55,5 +55,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Softwares', 'fa fa-desktop', Software::class);
 
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToRoute('Retour à l\'accueil', 'fa fa-arrow-left', 'classrooms');
     }
 }

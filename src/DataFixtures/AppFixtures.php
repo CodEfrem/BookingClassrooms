@@ -78,28 +78,21 @@ class AppFixtures extends Fixture
             array_push($equipments, $equipment);
         }
 
-        // Set classrooms
-        for ($j = 0; $j < 50; $j++) {
-            $customer = new Customer();
-            $customer->setEffective($faker->numberBetween(10, 30))
-                ->setCreatedAt($faker->dateTimeThisYear);
-            $manager->persist($customer);
-        }
 
         // Set classrooms
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $classroom = new Classroom();
             $classroom->setAdmin($admin)
                 ->setName('Classroom ' . $i)
                 ->setDescription($faker->text)
-                ->setAddress($faker->address)
+                ->setAddress($faker->streetAddress)
                 ->setCity($faker->city)
                 ->setZip($faker->postcode)
                 ->setCountry($faker->country)
                 ->setGauge($faker->randomNumber(2))
                 ->setFloor($faker->numberBetween(0, 10))
                 ->setParking($faker->boolean)
-                ->setPrice($faker->numberBetween(30000, 500000))
+                ->setPrice($faker->numberBetween(3000, 50000))
                 ->setStatus($faker->boolean)
                 ->setImage(rand(0,1) ? 'default.jpg' : 'default-1.jpg')
                 ->addEquipment($faker->randomElement($equipments));
@@ -115,7 +108,7 @@ class AppFixtures extends Fixture
                 ->setEndDate($faker->dateTimeThisYear('+5 months'))
                 ->setAmount($faker->randomFloat(2, 30000, 5000000))
                 ->setStatus($faker->boolean)
-                ->addCustomer($customer)
+                ->setCustomers($faker->numberBetween(5, 50))
                 ->setCreatedAt($faker->dateTimeThisYear)
                 ->setUpdatedAt($faker->dateTimeThisYear);
             $manager->persist($booking);
