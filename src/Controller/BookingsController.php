@@ -63,7 +63,7 @@ public function requestBooking(Request $request, EntityManagerInterface $entityM
             $this->addFlash('success', 'Votre réservation a été effectuée avec succès.');
 
             // Rediriger l'utilisateur vers une page de succès ou une autre page appropriée
-            return $this->redirectToRoute('booking_success');
+            return $this->redirectToRoute('classrooms');
         } else {
             // Si aucune salle n'est associée à la réservation
             // Afficher un message d'erreur à l'utilisateur
