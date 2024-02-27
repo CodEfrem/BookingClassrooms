@@ -21,32 +21,6 @@ class BookingRepository extends ServiceEntityRepository
         parent::__construct($registry, Booking::class);
     }
 
-    public function findBookingsByDates(\DateTimeInterface $startDate, \DateTimeInterface $endDate)
-    {
-        return $this->createQueryBuilder('b')
-            ->andWhere('b.startDate >= :startDate')
-            ->andWhere('b.endDate <= :endDate')
-            ->setParameter('startDate', $startDate)
-            ->setParameter('endDate', $endDate)
-            ->getQuery()
-            ->getResult();
-    }
-
-    public function findBookingsByDatesAndSoftware(\DateTimeInterface $startDate, \DateTimeInterface $endDate, $software)
-{
-    return $this->createQueryBuilder('b')
-        ->andWhere('b.startDate >= :startDate')
-        ->andWhere('b.endDate <= :endDate')
-        ->andWhere('b.software IN (:software)')
-        ->setParameter('startDate', $startDate)
-        ->setParameter('endDate', $endDate)
-        ->setParameter('software', $software)
-        ->getQuery()
-        ->getResult();
-}
-
-
-
 //    /**
 //     * @return Booking[] Returns an array of Booking objects
 //     */
