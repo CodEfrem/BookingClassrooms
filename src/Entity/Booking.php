@@ -20,7 +20,7 @@ class Booking
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $number = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -29,32 +29,28 @@ class Booking
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $end_date = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
+    private ?int $customers = null;
+
+    #[ORM\Column(nullable: true)]
     private ?int $amount = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $status = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: false)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $client = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     private ?Classroom $classroom = null;
 
-    #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'booking')]
-    private Collection $customers;
-    
-    /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
     private $user;
 
     public function getUser(): ?User
@@ -67,11 +63,6 @@ class Booking
         $this->user = $user;
 
         return $this;
-    }
-
-    public function __construct()
-    {
-        $this->customers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -135,6 +126,18 @@ class Booking
         return $this;
     }
 
+    public function getCustomers(): ?int
+    {
+        return $this->customers;
+    }
+
+    public function setcustomers(int $customers): static
+    {
+        $this->customers = $customers;
+
+        return $this;
+    }
+
     public function getAmount(): ?int
     {
         return $this->amount;
@@ -191,33 +194,6 @@ class Booking
     public function setClassroom(?Classroom $classroom): static
     {
         $this->classroom = $classroom;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Customer>
-     */
-   /**
-     * @return Collection|Customer[]
-     */
-    public function getCustomers(): Collection
-    {
-        return $this->customers;
-    }
-
-    public function addCustomer(Customer $customer): self
-    {
-        if (!$this->customers->contains($customer)) {
-            $this->customers[] = $customer;
-        }
-
-        return $this;
-    }
-
-    public function removeCustomer(Customer $customer): self
-    {
-        $this->customers->removeElement($customer);
 
         return $this;
     }
