@@ -96,6 +96,19 @@
             <strong><p>Status:</strong> {{ classroom.status ? 'Active' : 'Inactive' }}</p>
         </div>
 
+        <div class="bookings">
+            <h2>Bookings</h2>
+            {% if classroom.bookings is not empty and classroom.status == 'Inactive' %}
+            {% for booking in classroom.bookings %}
+            <div class="booking">
+                <p>This classroom is unavailable from</p>
+                <p>{{ booking.startDate|date('d-m-Y') }} to {{ booking.endDate|date('d-m-Y') }}</p>
+            </div>
+            {% endfor %}
+                <p>Aucune réservation</p>
+            {% endif %}
+        </div>
+
         <div class="buttons">
             <a href="{{ path('app_bookings_request') }}" class="btn">Réserver</a>
             <a href="{{ path('classrooms') }}" class="btn">Retour au salles</a>
