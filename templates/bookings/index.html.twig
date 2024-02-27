@@ -7,11 +7,15 @@
     {% if bookings is not empty %}
         <ul>
             {% for booking in bookings %}
-                <li>{{ booking.property }}</li>
+                <li>{{ booking.startDate|date('d-m-Y') }} to {{ booking.endDate|date('d-m-Y') }}</li>
                 {# Affichez d'autres détails de réservation selon votre modèle de données #}
             {% endfor %}
         </ul>
     {% else %}
         <p>Aucune réservation trouvée.</p>
+        <div class="text-center">
+        <p>You don't have any booking yet.</p>
+        <a href={{ path('classrooms') }} class="btn btn-custom rounded-pill w-auto">Book a room
+        </div>
     {% endif %}
 {% endblock %}
