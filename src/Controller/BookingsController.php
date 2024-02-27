@@ -18,9 +18,13 @@ class BookingsController extends AbstractController
     #[Route('/bookings', name: 'app_bookings')]
     public function index(BookingRepository $bookingRepository): Response
     {
+
+        if (!$this->getUser()) {
+            return $this->redirectToRoute('app_login');
+        }
         // Récupérer toutes les réservations effectuées par l'utilisateur actuel
         $user = $this->getUser();
-        $bookings = $bookingRepository->findBy(['user' => $user]);
+        $bookings = $bookingRepository->findBy(['client' => $user]);
         
 
         return $this->render('bookings/index.html.twig', [
@@ -38,6 +42,10 @@ class BookingsController extends AbstractController
     #[Route('/bookings/request', name: 'app_bookings_request')]
 public function requestBooking(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
 {
+
+    if (!$this->getUser()) {
+        return $this->redirectToRoute('app_login');
+    }
     $booking = new Booking();
     $form = $this->createForm(BookingType::class, $booking);
     $form->handleRequest($request);
