@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+
 use App\Entity\User;
 use App\Entity\Classroom;
 use App\Entity\Customer;
@@ -197,29 +198,26 @@ class Booking
     /**
      * @return Collection<int, Customer>
      */
+   /**
+     * @return Collection|Customer[]
+     */
     public function getCustomers(): Collection
     {
         return $this->customers;
     }
 
-    public function addCustomer(Customer $customer): static
+    public function addCustomer(Customer $customer): self
     {
         if (!$this->customers->contains($customer)) {
-            $this->customers->add($customer);
-            $customer->setBooking($this);
+            $this->customers[] = $customer;
         }
 
         return $this;
     }
 
-    public function removeCustomer(Customer $customer): static
+    public function removeCustomer(Customer $customer): self
     {
-        if ($this->customers->removeElement($customer)) {
-            // set the owning side to null (unless already changed)
-            if ($customer->getBooking() === $this) {
-                $customer->setBooking(null);
-            }
-        }
+        $this->customers->removeElement($customer);
 
         return $this;
     }
