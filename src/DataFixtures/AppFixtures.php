@@ -108,7 +108,7 @@ class AppFixtures extends Fixture
                 ->setEndDate($faker->dateTimeThisYear('+5 months'))
                 ->setAmount($faker->randomFloat(2, 30000, 5000000))
                 ->setStatus($faker->boolean)
-                ->setCustomers($$faker->numberBetween(5, 50))
+                ->setCustomers($faker->numberBetween(5, 50))
                 ->setCreatedAt($faker->dateTimeThisYear)
                 ->setUpdatedAt($faker->dateTimeThisYear);
             $manager->persist($booking);
