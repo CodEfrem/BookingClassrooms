@@ -85,7 +85,7 @@ class AppFixtures extends Fixture
             $classroom->setAdmin($admin)
                 ->setName('Classroom ' . $i)
                 ->setDescription($faker->text)
-                ->setAddress($faker->address)
+                ->setAddress($faker->streetAddress)
                 ->setCity($faker->city)
                 ->setZip($faker->postcode)
                 ->setCountry($faker->country)
