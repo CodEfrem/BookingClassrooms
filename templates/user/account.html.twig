@@ -4,6 +4,7 @@
 
 {% block body %}
     <div class="container py-5" id="c-account">
+
         <div id"">
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm">
@@ -13,13 +14,15 @@
                         </div>
                         <h2 class="h5 mb-2">{{ app.user.name }}</h2>
                         <p class="text-muted mb-4">{{ app.user.email }}</p>
-                        <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#updateModal">
+                        <button class="btn btn-outline-danger">
+                        <a href="{{ path('complete_profile') }}"</a>
                             <i class="bi bi-pencil-fill pe-1"></i>
                             Update Profile
                         </button>
                     </div>
                 </div>
             </div>
+
             <div class="col-lg-8">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
@@ -52,31 +55,4 @@
         </div>
     </div>
 
-    <!-- Update Modal -->
-    <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="updateModalLabel">Update your information</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(form) }}
-                        {{ form_row(form.name) }}
-                        {{ form_row(form.corporateName) }}
-                        {{ form_row(form.siret) }}
-                        {{ form_row(form.phone) }}
-                        {{ form_row(form.address) }}
-                        {{ form_row(form.city) }}
-                        {{ form_row(form.zip) }}
-                        {{ form_row(form.country) }}
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
-                    {{ form_end(form) }}
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}

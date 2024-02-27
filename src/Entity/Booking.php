@@ -2,6 +2,9 @@
 
 namespace App\Entity;
 
+
+use App\Entity\User;
+use App\Entity\Classroom;
 use App\Entity\Customer;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +20,7 @@ class Booking
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 50, nullable: true)]
     private ?string $number = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -26,31 +29,40 @@ class Booking
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $end_date = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
+    private ?int $customers = null;
+
+    #[ORM\Column(nullable: true)]
     private ?int $amount = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $status = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE,nullable: true)]
     private ?\DateTimeInterface $created_at = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: false)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $client = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     private ?Classroom $classroom = null;
 
-    #[ORM\OneToMany(targetEntity: Customer::class, mappedBy: 'booking')]
-    private Collection $customers;
+    private $user;
 
-    public function __construct()
+    public function getUser(): ?User
     {
-        $this->customers = new ArrayCollection();
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -61,6 +73,19 @@ class Booking
     public function setId(int $id): static
     {
         $this->id = $id;
+
+        return $this;
+    }
+
+     // Getter et setter pour $client
+    public function getClient(): ?User
+    {
+        return $this->client;
+    }
+
+    public function setClient(?User $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }
@@ -97,6 +122,18 @@ class Booking
     public function setEndDate(\DateTimeInterface $end_date): static
     {
         $this->end_date = $end_date;
+
+        return $this;
+    }
+
+    public function getCustomers(): ?int
+    {
+        return $this->customers;
+    }
+
+    public function setcustomers(int $customers): static
+    {
+        $this->customers = $customers;
 
         return $this;
     }
@@ -149,18 +186,6 @@ class Booking
         return $this;
     }
 
-    public function getClient(): ?User
-    {
-        return $this->client;
-    }
-
-    public function setClient(?User $client): static
-    {
-        $this->client = $client;
-
-        return $this;
-    }
-
     public function getClassroom(): ?Classroom
     {
         return $this->classroom;
@@ -169,36 +194,6 @@ class Booking
     public function setClassroom(?Classroom $classroom): static
     {
         $this->classroom = $classroom;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Customer>
-     */
-    public function getCustomers(): Collection
-    {
-        return $this->customers;
-    }
-
-    public function addCustomer(Customer $customer): static
-    {
-        if (!$this->customers->contains($customer)) {
-            $this->customers->add($customer);
-            $customer->setBooking($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCustomer(Customer $customer): static
-    {
-        if ($this->customers->removeElement($customer)) {
-            // set the owning side to null (unless already changed)
-            if ($customer->getBooking() === $this) {
-                $customer->setBooking(null);
-            }
-        }
 
         return $this;
     }

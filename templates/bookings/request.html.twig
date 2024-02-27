@@ -1,0 +1,70 @@
+<title>{% block title %}Pré-réservation{% endblock %}</title>
+
+{% block stylesheets %}
+
+    <style>
+    form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        color: #333;
+        text-align: center;
+    }
+
+    form input[type="date"],
+    form input[type="text"],
+    form input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+
+    form input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    form input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-center">Effectuer une pré-réservation</h1>
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_row(form.start_date, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.end_date, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.customers, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_row(form.classroom, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    
+
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+    {{ form_end(form) }}
+{% endblock %}
+
