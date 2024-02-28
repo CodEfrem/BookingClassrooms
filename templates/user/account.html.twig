@@ -5,7 +5,7 @@
 {% block body %}
     <div class="container py-5" id="c-account">
 
-        <div id"">
+        <div id="Profile">
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm">
                     <div class="card-body text-center">
@@ -75,13 +75,18 @@
 							</div>
 							<div class="card-body position-relative pt-3">
 								<div class="row g-3">
+                                
 									{% for booking in app.user.bookings %}
+                                    {% if booking.status is defined and booking.status %}
 										<div class="col-md-4 col-sm-12">
 											<div class="card shadow-none text-center h-100">
 												<div class="card-body p-2 pb-0">
-													{# <p class="card-title border fw-bold rounded-pill mb-1 mt-1">
-														{{ booking.classroom.name|slice(0, 15) }}...
-													</p> #}
+                                                    <div class="bg-success">
+                                                        <p class="fw-bolder text-success">Your booking is validate !</p>
+                                                    </div>
+													<p class="card-title border fw-bold rounded-pill mb-1 mt-1">
+														{{ booking.classroom|slice(0, 15) }}
+													</p>
 													<table class="table">
 														<tbody>
 															<tr>
@@ -95,14 +100,19 @@
 														</tbody>
 													</table>
 												</div>
-												<div class="card-footer p-2 border-0">
+											</div>
+                                            {% else %}
+                                            <div class="bg-danger">
+                                            <p class="text-danger">Your booking is awaiting validation !</p>
+                                            </div>
+										</div>
+                                        {% endif %}
+                                        <div class="card-footer p-2 border-0">
 													<a href={{ path('app_bookings', { booking: booking.id }) }} class="btn btn-sm btn-custom rounded-pill" data-bs-toggle="tooltip" data-bs-placement="top">
 														<i class="bi bi-eye"></i>
 														Check your booking
 													</a>
 												</div>
-											</div>
-										</div>
 									{% endfor %}
 
 								</div>
