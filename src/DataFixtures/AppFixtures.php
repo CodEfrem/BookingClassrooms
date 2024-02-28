@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
                 ->setCorporateName($faker->company)
                 ->setSiret($faker->siret)
                 ->setPhone($faker->phoneNumber)
-                ->setAddress($faker->address)
+                ->setAddress($faker->streetAddress)
                 ->setCity($faker->city)
                 ->setZip($faker->postcode)
                 ->setCountry($faker->country);
@@ -45,7 +45,7 @@ class AppFixtures extends Fixture
                 ->setPassword('$2y$13$h4KU/rGrzXn0xj4dNN8Q7uRF.oH1YIA/51KGc/3ae/FoOL1fNI9VW')
                 ->setSiret($faker->siret)
                 ->setPhone($faker->phoneNumber) 
-                ->setAddress($faker->address)
+                ->setAddress($faker->streetAddress)
                 ->setCity($faker->city)
                 ->setZip($faker->postcode)
                 ->setCountry($faker->country);
@@ -88,13 +88,13 @@ class AppFixtures extends Fixture
                 ->setAddress($faker->streetAddress)
                 ->setCity($faker->city)
                 ->setZip($faker->postcode)
-                ->setCountry($faker->country)
+                ->setCountry('FR')
                 ->setGauge($faker->randomNumber(2))
                 ->setFloor($faker->numberBetween(0, 10))
                 ->setParking($faker->boolean)
                 ->setPrice($faker->numberBetween(3000, 50000))
                 ->setStatus($faker->boolean)
-                ->setImage(rand(0,1) ? 'default.jpg' : 'default-1.jpg')
+                ->setImage(rand(0,1) ? 'salles.jpg' : 'salle1.jpg')
                 ->addEquipment($faker->randomElement($equipments));
             $manager->persist($classroom);
         }

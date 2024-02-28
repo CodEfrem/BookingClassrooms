@@ -38,32 +38,18 @@ class Booking
     #[ORM\Column(nullable: true)]
     private ?bool $status = null;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE,nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\ManyToOne(inversedBy: 'bookings')]
+    #[ORM\ManyToOne(inversedBy: 'bookings', cascade: ["persist"])]
     #[ORM\JoinColumn(nullable: true)]
     private ?User $client = null;
 
     #[ORM\ManyToOne(inversedBy: 'bookings')]
     private ?Classroom $classroom = null;
-
-    private $user;
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 
     public function getId(): ?int
     {
@@ -73,19 +59,6 @@ class Booking
     public function setId(int $id): static
     {
         $this->id = $id;
-
-        return $this;
-    }
-
-     // Getter et setter pour $client
-    public function getClient(): ?User
-    {
-        return $this->client;
-    }
-
-    public function setClient(?User $client): static
-    {
-        $this->client = $client;
 
         return $this;
     }
@@ -182,6 +155,19 @@ class Booking
     public function setUpdatedAt(\DateTimeInterface $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    // Getter et setter pour $client
+    public function getClient(): ?User
+    {
+        return $this->client;
+    }
+
+    public function setClient(?User $client): static
+    {
+        $this->client = $client;
 
         return $this;
     }

@@ -14,7 +14,7 @@
 	</head>
 	<body class="bg-body-tertiary">
 		<div class="vh-100 d-flex flex-column align-items-center justify-content-center">
-			<img src="{{asset('/images/icon.svg')}}" alt="BookingClassroom logo" width="200">
+			<img src="images/logo.png" alt="BookingClassroom logo" width="500">
 			<h1 class="text-center my-4">Complete your profile</h1>
 			<p>
 				Just a few more steps to complete your profile.
@@ -99,7 +99,8 @@
 				<label for="floatingInput">Your country</label>
 			</div>
 			<button type="submit" class="mt-2 btn btn-dark btn-lg rounded-pill">
-				Save
+			<a href={{ path('account') }} class="text-decoration-none text-white">
+				Save</a>
 			</button>
 			{{ form_end(form) }}
 		</div>
