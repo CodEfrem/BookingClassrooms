@@ -94,5 +94,10 @@ class Software
 
         return $this;
     }
+    // __toString() allows to use the object as a string
+    public function __toString(): string
+    {
+        return $this->softwareName;
+    }
 }
 
