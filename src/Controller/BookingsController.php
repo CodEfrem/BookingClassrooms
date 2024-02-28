@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-
+use Symfony\Bundle\SecurityBundle\Security;
 
 class BookingsController extends AbstractController
 {
@@ -42,19 +42,22 @@ class BookingsController extends AbstractController
     }
 
     #[Route('/bookings/request', name: 'app_bookings_request')]
-public function requestBooking(Request $request, EntityManagerInterface $entityManager, SessionInterface $session): Response
+public function requestBooking(Request $request, EntityManagerInterface $entityManager, Security $security, SessionInterface $session): Response
 {
 
-    if (!$this->getUser()) {
+    // Récupérer l'utilisateur connecté
+    $user = $security->getUser();
+
+    // Vérifier si l'utilisateur est connecté
+    if (!$user) {
         return $this->redirectToRoute('app_login');
     }
-
-    $user = new User();
 
     $booking = new Booking();
     $booking->setNumber(uniqid())
     ->setCreatedAt(new \DateTime('now'))
-    ->setUser($user);
+    ->setClient($user)
+    ;
     
     $form = $this->createForm(BookingType::class, $booking);
     $form->handleRequest($request);
