@@ -94,6 +94,26 @@
             <strong><p>Parking:</strong> {{ classroom.parking ? 'Yes' : 'No' }}</p>
             <strong><p>Price:</strong> {{ classroom.price }} €</p>
             <strong><p>Status:</strong> {{ classroom.status ? 'Active' : 'Inactive' }}</p>
+            {% if classroom.equipments is not empty %}
+                <strong><p>Equipments:</strong></p>
+                <ul>
+                    {% for equipment in classroom.equipments %}
+                        <li>{{ equipment.option }}</li>
+                        {% if equipment.softwares is not empty %}
+                            <ul>
+                                {% for software in equipment.softwares %}
+                                    <li>{{ software.softwareName }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <p>No software available</p>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No equipment available</p>
+            {% endif %}
+        </div>
         </div>
 
         <div class="bookings">
