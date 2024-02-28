@@ -10,6 +10,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\FormField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class EquipmentCrudController extends AbstractCrudController
@@ -34,7 +35,8 @@ class EquipmentCrudController extends AbstractCrudController
                 ->setHelp('All information about the equipment'),
             IdField::new('id')->hideOnForm(),
             TextField::new('option'),
-            DateField::new('created_at'),            
+            DateField::new('created_at'),
+            AssociationField::new('softwares'),            
         ];
     }
 }
