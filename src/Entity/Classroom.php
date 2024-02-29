@@ -91,17 +91,21 @@ class Classroom
     #[ORM\JoinColumn(nullable: false)]
     private ?User $admin = null;
 
-    #[ORM\ManyToMany(targetEntity: Equipment::class, inversedBy: 'classrooms')]
-    private Collection $equipments;
-
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'classroom', orphanRemoval: true)]
     private Collection $bookings;
+
+    #[ORM\ManyToMany(targetEntity: Software::class, mappedBy: 'classroom')]
+    private Collection $software;
+
+    #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'classroom')]
+    private Collection $equipment;
 
 
     public function __construct()
     {
-        $this->equipments = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->software = new ArrayCollection();
+        $this->equipment = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -266,30 +270,6 @@ class Classroom
     }
 
     /**
-     * @return Collection<int, Equipment>
-     */
-    public function getEquipments(): Collection
-    {
-        return $this->equipments;
-    }
-
-    public function addEquipment(Equipment $equipment): static
-    {
-        if (!$this->equipments->contains($equipment)) {
-            $this->equipments->add($equipment);
-        }
-
-        return $this;
-    }
-
-    public function removeEquipment(Equipment $equipment): static
-    {
-        $this->equipments->removeElement($equipment);
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Booking>
      */
     public function getBookings(): Collection
@@ -319,10 +299,65 @@ class Classroom
         return $this;
     }
 
-    // __toString() allows to use the object as a string
-    public function __toString(): string
+    /**
+     * @return Collection<int, Software>
+     */
+    public function getSoftware(): Collection
     {
-        return $this->name;
+        return $this->software;
     }
+
+    public function addSoftware(Software $software): static
+    {
+        if (!$this->software->contains($software)) {
+            $this->software->add($software);
+            $software->addClassroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoftware(Software $software): static
+    {
+        if ($this->software->removeElement($software)) {
+            $software->removeClassroom($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipment>
+     */
+    public function getEquipment(): Collection
+    {
+        return $this->equipment;
+    }
+
+    public function addEquipment(Equipment $equipment): static
+    {
+        if (!$this->equipment->contains($equipment)) {
+            $this->equipment->add($equipment);
+            $equipment->addClassroom($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipment(Equipment $equipment): static
+    {
+        if ($this->equipment->removeElement($equipment)) {
+            $equipment->removeClassroom($this);
+        }
+
+        return $this;
+    }
+
+        // __toString() allows to use the object as a string
+        public function __toString(): string
+        {
+            return $this->name;
+        }
+    
 
 }

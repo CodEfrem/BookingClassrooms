@@ -66,7 +66,8 @@ This entity represents a classroom for rent.
 | status      | bool       | NOT NULL             |              |
 | image       | string     | 255                  |              |
 | admin       | ManyToOne  | NOT NULL, OrphanTrue | User         |
-| equipments  | ManyToMany | NOT NULL,            | Equipment    |
+| equipment   | ManyToMany | NOT NULL,            | Equipment    |
+| software    | ManyToMany | NOT NULL,            | Software     |
 
 ---
 
@@ -96,7 +97,7 @@ This entity represents the equipment for a classroom.
 |------------|------------|----------------------|--------------|
 | option     | string     | 50 NOT NULL          |              | 
 | admin      | ManyToOne  | NOT NULL, OrphanTrue | User         |
-| classrooms | ManyToMany | NOT NULL             | Classroom    | 
+| classroom  | ManyToMany | NOT NULL             | Classroom    | 
 | created_at | datetime   | NOT NULL             |              |
 | updated_at | datetime   |                      |              |
 
@@ -112,7 +113,8 @@ This entity represents the software for a classroom.
 | version      | string    | 255          |              |
 | description  | text      |              |              | 
 | year         | integer   |              |              |
-| equipment    | ManyToOne | NOT NULL     | Equipment    |
+| classroom    | ManyToMany| NOT NULL     | Classroom    |
+| admin        | ManyToOne | NOT NULL     | User         |
 
 ---
 
