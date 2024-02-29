@@ -31,7 +31,7 @@ class Software
     #[ORM\ManyToMany(targetEntity: Classroom::class, inversedBy: 'software')]
     private Collection $classroom;
 
-    #[ORM\ManyToOne(inversedBy: 'software')]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'software')]
     private ?User $admin = null;
 
     public function __construct()
