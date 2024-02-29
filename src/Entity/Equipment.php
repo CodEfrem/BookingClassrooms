@@ -25,7 +25,7 @@ class Equipment
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updated_at = null;
 
-    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'equipments')]
     private ?User $admin = null;
 
     #[ORM\ManyToMany(targetEntity: Classroom::class, inversedBy: 'equipment')]

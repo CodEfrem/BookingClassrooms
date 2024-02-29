@@ -65,7 +65,7 @@ class AppFixtures extends Fixture
             array_push($softwares, $software);
             }
 
-        // Set equipments
+        // Set equipment
         $equipments = [];
         for ($i = 0; $i < 10; $i++) {
             $equipment = new Equipment();

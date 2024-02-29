@@ -94,10 +94,10 @@
             <strong><p>Parking:</strong> {{ classroom.parking ? 'Yes' : 'No' }}</p>
             <strong><p>Price:</strong> {{ classroom.price }} €</p>
             <strong><p>Status:</strong> {{ classroom.status ? 'Active' : 'Inactive' }}</p>
-            {% if classroom.equipments is not empty %}
+            {% if classroom.equipment is not empty %}
                 <strong><p>Equipments:</strong></p>
                 <ul>
-                    {% for equipment in classroom.equipments %}
+                    {% for equipment in classroom.equipment %}
                         <li>{{ equipment.option }}</li>
                         {% if equipment.softwares is not empty %}
                             <ul>

@@ -88,7 +88,7 @@ class Classroom
     private ?string $image = 'default.png';
 
     #[ORM\ManyToOne(inversedBy: 'classrooms')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private ?User $admin = null;
 
     #[ORM\OneToMany(targetEntity: Booking::class, mappedBy: 'classroom', orphanRemoval: true)]
@@ -358,6 +358,5 @@ class Classroom
         {
             return $this->name;
         }
-    
 
 }
