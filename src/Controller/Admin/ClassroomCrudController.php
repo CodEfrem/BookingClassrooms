@@ -51,11 +51,12 @@ class ClassroomCrudController extends AbstractCrudController
             MoneyField::new('price')
             ->setCurrency('EUR'),
             BooleanField::new('status'),
-            AssociationField::new('equipments'),
+            AssociationField::new('equipment'),
+            AssociationField::new('software'),
+            AssociationField::new('admin')->hideOnForm(),
             ImageField::new('image')
             ->setBasePath('uploads/')
             ->setUploadDir('public/uploads/'),
         ];
     }
-    
 }
