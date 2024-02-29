@@ -28,16 +28,14 @@ class Equipment
     #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $admin = null;
 
-    #[ORM\ManyToMany(targetEntity: Classroom::class, mappedBy: 'equipments')]
-    private Collection $classrooms;
-
-    #[ORM\OneToMany(targetEntity: Software::class, mappedBy: 'equipment')]
-    private Collection $softwares;
+    #[ORM\ManyToMany(targetEntity: Classroom::class, inversedBy: 'equipment')]
+    private Collection $classroom;
 
     public function __construct()
     {
-        $this->classrooms = new ArrayCollection();
+        $this->classroom = new ArrayCollection();
     }
+
 
     public function getId(): ?int
     {
@@ -92,19 +90,23 @@ class Equipment
         return $this;
     }
 
+    public function __toString() {
+
+        return $this->option; // Retourne le nom de l'équipement
+    }
+
     /**
      * @return Collection<int, Classroom>
      */
-    public function getClassrooms(): Collection
+    public function getClassroom(): Collection
     {
-        return $this->classrooms;
+        return $this->classroom;
     }
 
     public function addClassroom(Classroom $classroom): static
     {
-        if (!$this->classrooms->contains($classroom)) {
-            $this->classrooms->add($classroom);
-            $classroom->addEquipment($this);
+        if (!$this->classroom->contains($classroom)) {
+            $this->classroom->add($classroom);
         }
 
         return $this;
@@ -112,46 +114,9 @@ class Equipment
 
     public function removeClassroom(Classroom $classroom): static
     {
-        if ($this->classrooms->removeElement($classroom)) {
-            $classroom->removeEquipment($this);
-        }
+        $this->classroom->removeElement($classroom);
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Software>
-     */
-    public function getSoftwares(): Collection
-    {
-        return $this->softwares;
-    }
-
-    public function addSoftware(Software $software): static
-    {
-        if (!$this->softwares->contains($software)) {
-            $this->softwares->add($software);
-            $software->setEquipment($this);
-        }
-
-        return $this;
-    }
-
-    public function removeSoftware(Software $software): static
-    {
-        if ($this->softwares->removeElement($software)) {
-            // set the owning side to null (unless already changed)
-            if ($software->getEquipment() === $this) {
-                $software->setEquipment(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function __toString() {
-
-        return $this->option; // Retourne le nom de l'équipement
     }
 
 }

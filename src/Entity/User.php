@@ -132,11 +132,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Equipment::class, mappedBy: 'admin', orphanRemoval: true)]
     private Collection $equipments;
 
+    #[ORM\OneToMany(targetEntity: Software::class, mappedBy: 'admin')]
+    private Collection $software;
+
     public function __construct()
     {
         $this->classrooms = new ArrayCollection();
         $this->bookings = new ArrayCollection();
         $this->equipments = new ArrayCollection();
+        $this->software = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -447,5 +451,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function toString(): string
     {
         return $this->email;
+    }
+
+    /**
+     * @return Collection<int, Software>
+     */
+    public function getSoftware(): Collection
+    {
+        return $this->software;
+    }
+
+    public function addSoftware(Software $software): static
+    {
+        if (!$this->software->contains($software)) {
+            $this->software->add($software);
+            $software->setAdmin($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSoftware(Software $software): static
+    {
+        if ($this->software->removeElement($software)) {
+            // set the owning side to null (unless already changed)
+            if ($software->getAdmin() === $this) {
+                $software->setAdmin(null);
+            }
+        }
+
+        return $this;
     }
 }
