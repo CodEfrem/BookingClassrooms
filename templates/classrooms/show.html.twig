@@ -84,19 +84,20 @@
         {% endif %}
 
         <div class="details">
-            <strong><p>Description:</strong> {{ classroom.description }}</p>
-            <strong><p>Address:</strong> {{ classroom.address }}, {{ classroom.city }}, {{ classroom.country }}, {{ classroom.zip }}</p>
-            <strong><p>Gauge:</strong> {{ classroom.gauge }} personne(s)</p>
-            <strong><p>Floor: </strong>{{ classroom.floor }} étages</p>
-            <strong><p>Parking:</strong> {{ classroom.parking ? 'Yes' : 'No' }}</p>
-            <strong><p>Price:</strong> {{ classroom.price }} €</p>
-            <strong><p>Status:</strong> {{ classroom.status ? 'Active' : 'Inactive' }}</p>
+            <strong><p>Description : </strong> {{ classroom.description }}</p>
+            <strong><p>Address : </strong> {{ classroom.address }}, {{ classroom.city }}, {{ classroom.country }}, {{ classroom.zip }}</p>
+            <strong><p>Gauge : </strong> {{ classroom.gauge }} personne(s)</p>
+            <strong><p>Floor : </strong>{{ classroom.floor }} étages</p>
+            <strong><p>Parking : </strong> {{ classroom.parking ? 'Yes' : 'No' }}</p>
+            <strong><p>Price : </strong> {{ classroom.price }} €</p>
+            <strong><p>Status : </strong> {{ classroom.status ? 'Active' : 'Inactive' }}</p>
             {% if classroom.equipment is not empty %}
-                <strong><p>Equipments:</strong></p>
+                <strong><p>Equipments : </strong></p>
                 <ul>
                     {% for equipment in classroom.equipment %}
                         <li>{{ equipment.option }}</li>
                         {% if classroom.software is not empty %}
+                        <strong><p>Softwares : </strong></p>
                             <ul>
                                 {% for software in classroom.software %}
                                     <li>{{ software.softwareName }}</li>
