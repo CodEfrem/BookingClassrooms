@@ -99,9 +99,9 @@
                 <ul>
                     {% for equipment in classroom.equipment %}
                         <li>{{ equipment.option }}</li>
-                        {% if equipment.softwares is not empty %}
+                        {% if classroom.software is not empty %}
                             <ul>
-                                {% for software in equipment.softwares %}
+                                {% for software in classroom.software %}
                                     <li>{{ software.softwareName }}</li>
                                 {% endfor %}
                             </ul>
