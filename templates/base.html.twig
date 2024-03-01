@@ -33,6 +33,7 @@
 				{% if app.request.attributes.get('_route') == 'app_home' %}
 					{% include 'components/home.html.twig' %}
 				{% endif %}
+				{{ include('components/flash-message.html.twig') }}
 			{% endblock %}
 
 			{% block footer %}
