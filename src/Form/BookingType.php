@@ -36,12 +36,6 @@ class BookingType extends AbstractType
             ->add('customers', IntegerType::class, [
                 'label' => 'Nombre de clients',
             ])
-            ->add('classroom', EntityType::class, [ 
-                'class' => Classroom::class,
-                'choice_label' => 'name ', 
-                'label' => 'Salle n° ',
-                'disabled' => false, 
-            ])
             ;
     }
 

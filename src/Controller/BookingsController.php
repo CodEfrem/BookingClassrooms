@@ -7,6 +7,7 @@ use App\Entity\Booking;
 use App\Entity\Classroom;
 use App\Form\BookingType;
 use App\Repository\BookingRepository;
+use App\Repository\ClassroomRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,10 +42,15 @@ class BookingsController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
-    #[Route('/bookings/request', name: 'app_bookings_request')]
-public function requestBooking(Request $request, EntityManagerInterface $entityManager, Security $security, SessionInterface $session): Response
-{
+    #[Route('/bookings/request/{classroomId}', name: 'app_bookings_request')]
+public function requestBooking(Request $request, 
+EntityManagerInterface $entityManager, 
+Security $security,
+ClassroomRepository $classroomRepository,
+$classroomId
+): Response
 
+{
     // Récupérer l'utilisateur connecté
     $user = $security->getUser();
 
@@ -53,10 +59,22 @@ public function requestBooking(Request $request, EntityManagerInterface $entityM
         return $this->redirectToRoute('app_login');
     }
 
+// Récupérer la salle de classe correspondant à l'identifiant
+$classroom = $classroomRepository->find($classroomId);
+
+// Vérifier si une salle de classe a été trouvée
+if (!$classroom) {
+    // Si aucune salle de classe correspondante n'est trouvée
+    // Rediriger l'utilisateur vers une page appropriée
+    // (peut-être une page d'erreur ou une page de sélection de salle de classe)
+    return $this->redirectToRoute('classrooms');
+}
+
     $booking = new Booking();
     $booking->setNumber(uniqid())
     ->setCreatedAt(new \DateTime('now'))
     ->setClient($user)
+    ->setClassroom($classroom)
     ;
     
     $form = $this->createForm(BookingType::class, $booking);

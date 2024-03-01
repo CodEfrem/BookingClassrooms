@@ -100,7 +100,6 @@ class Classroom
     #[ORM\ManyToMany(targetEntity: Equipment::class, mappedBy: 'classroom')]
     private Collection $equipment;
 
-
     public function __construct()
     {
         $this->bookings = new ArrayCollection();
@@ -353,10 +352,9 @@ class Classroom
         return $this;
     }
 
-        // __toString() allows to use the object as a string
-        public function __toString(): string
-        {
-            return $this->name;
-        }
-
+    // __toString() allows to use the object as a string
+    public function __toString(): string
+    {
+        return $this->name;
+    }
 }

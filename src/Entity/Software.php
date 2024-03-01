@@ -39,8 +39,6 @@ class Software
         $this->classroom = new ArrayCollection();
     }
 
-
-
     public function getId(): ?int
     {
         return $this->id;
@@ -118,8 +116,6 @@ class Software
         return $this;
     }
 
-
-    
     // __toString() allows to use the object as a string
     public function __toString(): string
     {
@@ -138,4 +134,3 @@ class Software
         return $this;
     }
 }
-
