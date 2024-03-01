@@ -44,7 +44,6 @@ class BookingsController extends AbstractController
     #[Route('/bookings/request', name: 'app_bookings_request')]
 public function requestBooking(Request $request, EntityManagerInterface $entityManager, Security $security, SessionInterface $session): Response
 {
-
     // Récupérer l'utilisateur connecté
     $user = $security->getUser();
 

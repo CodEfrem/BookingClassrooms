@@ -446,7 +446,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    
+
     // toString() allows to use the object as a string
     public function toString(): string
     {

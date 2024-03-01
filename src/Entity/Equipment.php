@@ -19,7 +19,7 @@ class Equipment
     #[ORM\Column(length: 50)]
     private ?string $option = null;
 
-    #[ORM\Column (type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $created_at = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
@@ -90,7 +90,8 @@ class Equipment
         return $this;
     }
 
-    public function __toString() {
+    public function __toString()
+    {
 
         return $this->option; // Retourne le nom de l'équipement
     }
@@ -118,5 +119,4 @@ class Equipment
 
         return $this;
     }
-
 }
