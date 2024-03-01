@@ -37,9 +37,9 @@
 									<li>
 										<a href="{{ path('account') }}">account</a>
 									</li>
-									<li>
+									{# <li>
 										<a href="{{ path('app_bookings') }}">booking</a>
-									</li>
+									</li> #}
 									{% if is_granted('ROLE_ADMIN') %}
 										<li>
 											<a href="{{ path('admin') }}">Dashboard</a>
